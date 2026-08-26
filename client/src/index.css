@@ -17,7 +17,10 @@
   --color-occupied-bg: #fee2e2;
   --color-occupied-fg: #dc2626;
   --color-destructive: #dc2626;
-  --color-destructive-hover: #b91c1c;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #0f172a;
+  --color-accent: #f1f5f9;
+  --color-accent-foreground: #0f172a;
   --color-skeleton: #ededed;
   --color-avatar-bg: #5478d9;
 }
