@@ -18,6 +18,8 @@
   --color-occupied-fg: #dc2626;
   --color-destructive: #dc2626;
   --color-destructive-hover: #b91c1c;
+  --color-skeleton: #ededed;
+  --color-avatar-bg: #5478d9;
 }
 
 body {
