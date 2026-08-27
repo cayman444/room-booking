@@ -1,2 +1,2 @@
 export * from './api/useMe'
-export * from './types'
+export * from './model/types'

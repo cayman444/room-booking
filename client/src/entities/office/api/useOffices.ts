@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { apiClient } from '@/shared/api'
-import type { Office } from '../types'
+import type { Office } from '../model/types'
 
 interface ApiResponse {
   items: Office[]

@@ -1,2 +1,2 @@
 export * from './api/useOffices'
-export * from './types'
+export * from './model/types'
