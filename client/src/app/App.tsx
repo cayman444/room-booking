@@ -1,5 +1,4 @@
 import { RouterProvider } from 'react-router-dom'
-
 import { QueryProvider } from './providers'
 import { router } from './routes'
 

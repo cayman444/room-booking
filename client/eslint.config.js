@@ -23,7 +23,12 @@ export default defineConfig([
       globals: globals.browser,
     },
     rules: {
-      'simple-import-sort/imports': 'error',
+      'simple-import-sort/imports': [
+        'error',
+        {
+          groups: [['^\\u0000', '^node:', '^@?\\w', '^', '^\\.']],
+        },
+      ],
       'simple-import-sort/exports': 'error',
       'react-refresh/only-export-components': ['off'],
     },

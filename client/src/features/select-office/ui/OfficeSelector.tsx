@@ -1,5 +1,4 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui'
-
 import { useSelectOffice } from '../model/useSelectOffice'
 import { OfficeSelectorSkeleton } from './OfficeSelectorSkeleton'
 

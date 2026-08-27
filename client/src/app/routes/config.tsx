@@ -1,8 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
-
 import { MyBookingsPage, NotFoundPage, RoomDetailPage, RoomsPage } from '@/pages'
 import { ROUTES_PATHS } from '@/shared/config/routes'
-
 import { RootLayout } from '../layouts'
 
 export const router = createBrowserRouter([

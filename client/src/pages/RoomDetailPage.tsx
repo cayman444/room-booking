@@ -5,8 +5,8 @@ export function RoomDetailPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-foreground">Детали переговорной</h1>
-      <p className="mt-2 text-muted">ID комнаты: {roomId}</p>
+      <h1 className="text-foreground text-2xl font-bold">Детали переговорной</h1>
+      <p className="text-muted mt-2">ID комнаты: {roomId}</p>
     </div>
   )
 }

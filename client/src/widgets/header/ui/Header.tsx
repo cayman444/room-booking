@@ -1,8 +1,6 @@
 import { CalendarCheck } from 'lucide-react'
 import { Link, NavLink } from 'react-router-dom'
-
 import { ROUTES_PATHS } from '@/shared/config/routes'
-
 import { UserCard } from './UserCard'
 
 const NAV_LIST = [

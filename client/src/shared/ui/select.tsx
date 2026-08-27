@@ -1,7 +1,6 @@
 import * as SelectPrimitive from '@radix-ui/react-select'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import * as React from 'react'
-
 import { cn } from '@/shared/lib/utils'
 
 const Select = SelectPrimitive.Root

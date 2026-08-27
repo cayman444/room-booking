@@ -1,5 +1,4 @@
 import { useSearchParams } from 'react-router-dom'
-
 import { useOffices } from '@/entities/office'
 import { formatOfficeTime } from '@/shared/lib/date'
 import { useCurrentTime } from '@/shared/model'
