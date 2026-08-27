@@ -30,3 +30,67 @@ body {
   background-color: var(--color-background);
   color: var(--color-foreground);
 }
+
+@keyframes dropdown-enter-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdown-enter-top {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdown-exit-bottom {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes dropdown-exit-top {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.animate-select-content[data-state='open'][data-side='bottom'] {
+  animation: dropdown-enter-bottom 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-select-content[data-state='open'][data-side='top'] {
+  animation: dropdown-enter-top 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-select-content[data-state='closed'][data-side='bottom'] {
+  animation: dropdown-exit-bottom 140ms ease-in forwards;
+}
+
+.animate-select-content[data-state='closed'][data-side='top'] {
+  animation: dropdown-exit-top 140ms ease-in forwards;
+}
