@@ -9,6 +9,7 @@ export function QueryProvider({ children }: PropsWithChildren) {
         defaultOptions: {
           queries: {
             refetchOnWindowFocus: false,
+            staleTime: 1000 * 60 * 5,
           },
         },
       }),

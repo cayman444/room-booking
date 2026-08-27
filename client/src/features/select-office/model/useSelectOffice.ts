@@ -14,7 +14,7 @@ export function useSelectOffice() {
 
   const officeTime = selectedOffice?.timezone
     ? formatOfficeTime(selectedOffice.timezone, currentTime)
-    : '--'
+    : '---'
 
   const handleSelectOffice = (officeId: string) => {
     const newParams = new URLSearchParams(searchParams)
