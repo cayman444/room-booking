@@ -6,7 +6,7 @@ import { calculateIntervalIso, formatDateToYMD } from '@/shared/lib/date'
 export const useAvailableRooms = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const officeId = searchParams.get(SEARCH_PARAM_KEYS.OFFICE_ID) || ''
-  const date = formatDateToYMD(new Date())
+  const date = searchParams.get(SEARCH_PARAM_KEYS.DATE) || formatDateToYMD(new Date())
   const startTime = searchParams.get(SEARCH_PARAM_KEYS.START_TIME) || undefined
   const duration = Number(searchParams.get(SEARCH_PARAM_KEYS.DURATION)) || 60
   const minCapacityStr = searchParams.get(SEARCH_PARAM_KEYS.MIN_CAPACITY)

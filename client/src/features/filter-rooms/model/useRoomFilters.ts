@@ -5,6 +5,7 @@ export function useRoomFilters() {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const officeId = searchParams.get(SEARCH_PARAM_KEYS.OFFICE_ID) || ''
+  const date = searchParams.get(SEARCH_PARAM_KEYS.DATE) || ''
   const startTime = searchParams.get(SEARCH_PARAM_KEYS.START_TIME) || ''
   const duration = searchParams.get(SEARCH_PARAM_KEYS.DURATION) || '60'
   const minCapacity = searchParams.get(SEARCH_PARAM_KEYS.MIN_CAPACITY) || 'all'
@@ -19,6 +20,10 @@ export function useRoomFilters() {
     }
 
     setSearchParams(nextParams)
+  }
+
+  const setDate = (newDate: string) => {
+    updateParam(SEARCH_PARAM_KEYS.DATE, newDate)
   }
 
   const setStartTime = (newTime: string) => {
@@ -45,9 +50,11 @@ export function useRoomFilters() {
 
   return {
     officeId,
+    date,
     startTime,
     duration,
     minCapacity,
+    setDate,
     setStartTime,
     setDuration,
     setMinCapacity,
