@@ -1,4 +1,4 @@
-export function formatOfficeTime(timezone?: string): string {
+export function formatOfficeTime(timezone?: string, date: Date = new Date()): string {
   if (!timezone) return '--'
 
   try {
@@ -7,12 +7,12 @@ export function formatOfficeTime(timezone?: string): string {
       hour: '2-digit',
       minute: '2-digit',
       hour12: false,
-    }).format(new Date())
+    }).format(date)
 
     const tzShort = timezone.includes('Moscow') ? 'MSK' : timezone.split('/')[1] || timezone
 
     return `${timeStr} ${tzShort}`
   } catch {
-    return '---'
+    return '--'
   }
 }

@@ -1,5 +1,7 @@
 import axios, { type AxiosRequestConfig } from 'axios'
 
+import { ApiError } from './apiError'
+
 export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1'
 
 const instance = axios.create({
@@ -9,8 +11,7 @@ const instance = axios.create({
 instance.interceptors.response.use(
   (response) => response.data,
   (error) => {
-    const message = error.response?.data?.error?.message || error.message || 'Ошибка запроса'
-    return Promise.reject(new Error(message))
+    return Promise.reject(ApiError.fromAxiosError(error))
   },
 )
 
