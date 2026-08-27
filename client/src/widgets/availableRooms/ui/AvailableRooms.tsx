@@ -1,28 +1,47 @@
 import { useSearchParams } from 'react-router-dom'
 import { RoomCard, useRooms } from '@/entities/rooms'
 import { SEARCH_PARAM_KEYS } from '@/shared/config'
+import { EmptyNoOffice } from './EmptyNoOffice'
+import { EmptyRooms } from './EmptyRooms'
+import { RoomsError } from './RoomsError'
+import { RoomsLoading } from './RoomsLoading'
 
 export const AvailableRooms = () => {
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const officeId = searchParams.get(SEARCH_PARAM_KEYS.OFFICE_ID) || ''
+  const minCapacityStr = searchParams.get(SEARCH_PARAM_KEYS.MIN_CAPACITY)
+  const minCapacity = minCapacityStr ? Number(minCapacityStr) : undefined
 
-  const { data: rooms = [] } = useRooms({ officeId })
+  const {
+    data: rooms = [],
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useRooms({
+    officeId,
+    minCapacity,
+  })
 
-  // if (!officeId) {
-  //   return <EmptyNoOffice />
-  // }
+  const handleResetFilters = () => {
+    setSearchParams('')
+  }
 
-  // if (isLoading) {
-  //   return <RoomsSkeleton />
-  // }
+  if (!officeId) {
+    return <EmptyNoOffice />
+  }
 
-  // if (isError) {
-  //   return <RoomsError onRetry={() => refetch()} />
-  // }
+  if (isLoading) {
+    return <RoomsLoading />
+  }
 
-  // if (rooms.length === 0) {
-  //   return <RoomsEmpty />
-  // }
+  if (isError) {
+    return <RoomsError message={error?.message} onRetry={refetch} />
+  }
+
+  if (rooms.length === 0) {
+    return <EmptyRooms onResetFilters={handleResetFilters} />
+  }
 
   return (
     <div className="p-10">
