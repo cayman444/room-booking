@@ -1,3 +1,5 @@
+export * from './model/consts'
+export * from './model/useRoomFilters'
 export * from './ui/FilterCapacity'
 export * from './ui/FilterDate'
 export * from './ui/FilterDuration'
