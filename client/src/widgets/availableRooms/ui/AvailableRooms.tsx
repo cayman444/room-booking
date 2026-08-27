@@ -1,31 +1,13 @@
-import { useSearchParams } from 'react-router-dom'
-import { RoomCard, useRooms } from '@/entities/rooms'
-import { SEARCH_PARAM_KEYS } from '@/shared/config'
+import { RoomCard } from '@/entities/rooms'
+import { useAvailableRooms } from '../model/useAvailableRooms'
 import { EmptyNoOffice } from './EmptyNoOffice'
 import { EmptyRooms } from './EmptyRooms'
 import { RoomsError } from './RoomsError'
 import { RoomsLoading } from './RoomsLoading'
 
 export const AvailableRooms = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const officeId = searchParams.get(SEARCH_PARAM_KEYS.OFFICE_ID) || ''
-  const minCapacityStr = searchParams.get(SEARCH_PARAM_KEYS.MIN_CAPACITY)
-  const minCapacity = minCapacityStr ? Number(minCapacityStr) : undefined
-
-  const {
-    data: rooms = [],
-    isLoading,
-    isError,
-    error,
-    refetch,
-  } = useRooms({
-    officeId,
-    minCapacity,
-  })
-
-  const handleResetFilters = () => {
-    setSearchParams('')
-  }
+  const { rooms, officeId, isLoading, error, isError, refetch, handleResetFilters } =
+    useAvailableRooms()
 
   if (!officeId) {
     return <EmptyNoOffice />
