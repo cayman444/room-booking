@@ -22,11 +22,9 @@ export const BookRoomModal: FC<BookRoomModalProps> = ({
 }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md gap-6 rounded-2xl p-6 sm:max-w-lg">
-        <DialogHeader className="border-border border-b pb-4 text-left">
-          <DialogTitle className="text-foreground text-[22px] font-extrabold">
-            Новое бронирование
-          </DialogTitle>
+      <DialogContent>
+        <DialogHeader className="border-border border-b pb-5">
+          <DialogTitle>Новое бронирование</DialogTitle>
           {currentRoom && (
             <DialogDescription className="text-muted text-sm font-normal">
               Переговорная:{' '}
