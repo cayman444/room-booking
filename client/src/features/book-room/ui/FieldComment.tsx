@@ -12,7 +12,7 @@ export const FieldComment: FC<FieldCommentProps> = ({ registration, error }) => 
     <div className="flex flex-col gap-1.5">
       <label
         htmlFor="booking-comment"
-        className="text-foreground block text-sm font-semibold select-none"
+        className="text-muted block cursor-pointer text-sm font-bold select-none"
       >
         Комментарий
       </label>
@@ -22,7 +22,7 @@ export const FieldComment: FC<FieldCommentProps> = ({ registration, error }) => 
         error={!!error}
         {...registration}
       />
-      {error && <p className="text-destructive text-xs font-medium">{error}</p>}
+      {error && <p className="text-destructive text-xs font-semibold">{error}</p>}
     </div>
   )
 }

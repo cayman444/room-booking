@@ -37,7 +37,7 @@ export function FieldDate({ value, onChange, error }: FieldDateProps) {
 
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-foreground block text-sm font-semibold select-none">Дата</label>
+      <span className="text-muted block text-sm font-bold select-none">Дата</span>
       <Select open={open} onOpenChange={handleOpenChange}>
         <SelectTrigger>
           <div className="flex items-center gap-2">
@@ -59,7 +59,7 @@ export function FieldDate({ value, onChange, error }: FieldDateProps) {
           />
         </SelectContent>
       </Select>
-      {error && <p className="text-destructive text-xs font-medium">{error}</p>}
+      {error && <p className="text-destructive text-xs font-semibold">{error}</p>}
     </div>
   )
 }

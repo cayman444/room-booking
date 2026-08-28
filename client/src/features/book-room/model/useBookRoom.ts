@@ -8,10 +8,10 @@ import { type BookRoomFormValues, bookRoomSchema } from './bookRoom.schema'
 
 interface UseBookRoomProps {
   room: Room
-  onSuccess?: () => void
+  onClose: () => void
 }
 
-export function useBookRoom({ room, onSuccess }: UseBookRoomProps) {
+export function useBookRoom({ room, onClose }: UseBookRoomProps) {
   const [searchParams] = useSearchParams()
 
   const defaultDate = searchParams.get(SEARCH_PARAM_KEYS.DATE) || formatDateToYMD(new Date())

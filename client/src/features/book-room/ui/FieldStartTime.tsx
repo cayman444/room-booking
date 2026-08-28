@@ -12,9 +12,7 @@ interface FieldStartTimeProps {
 export const FieldStartTime: FC<FieldStartTimeProps> = ({ value, onChange, error }) => {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-foreground block text-sm font-semibold select-none">
-        Время начала
-      </label>
+      <span className="text-muted block text-sm font-bold select-none">Время начала</span>
       <Select value={value} onValueChange={onChange}>
         <SelectTrigger
           className={
@@ -34,7 +32,7 @@ export const FieldStartTime: FC<FieldStartTimeProps> = ({ value, onChange, error
           ))}
         </SelectContent>
       </Select>
-      {error && <p className="text-destructive text-xs font-medium">{error}</p>}
+      {error && <p className="text-destructive text-xs font-semibold">{error}</p>}
     </div>
   )
 }

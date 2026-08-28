@@ -14,7 +14,7 @@ export const BookingSummary: FC<BookingSummaryProps> = ({ date, startTime }) => 
   const summaryText = formatDateDisplay(date)
 
   return (
-    <div className="bg-available-bg text-available-fg flex items-center gap-2.5 rounded-xl p-3.5 text-xs font-semibold">
+    <div className="bg-available-bg text-available-fg flex items-center gap-2 rounded-lg p-3.5 text-xs font-semibold">
       <Info className="size-4 shrink-0 stroke-3" />
       <span>{summaryText}</span>
     </div>

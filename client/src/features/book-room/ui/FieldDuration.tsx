@@ -14,9 +14,7 @@ export const FieldDuration: FC<FieldDurationProps> = ({ value, onChange, error }
 
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-foreground block text-sm font-semibold select-none">
-        Продолжительность
-      </label>
+      <span className="text-muted block text-sm font-bold select-none">Продолжительность</span>
       <Select value={stringValue} onValueChange={(val) => onChange(Number(val))}>
         <SelectTrigger
           className={
@@ -33,7 +31,7 @@ export const FieldDuration: FC<FieldDurationProps> = ({ value, onChange, error }
           ))}
         </SelectContent>
       </Select>
-      {error && <p className="text-destructive text-xs font-medium">{error}</p>}
+      {error && <p className="text-destructive text-xs font-semibold">{error}</p>}
     </div>
   )
 }

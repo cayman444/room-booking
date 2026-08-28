@@ -16,13 +16,13 @@ export const FormField = forwardRef<HTMLInputElement, FormFieldProps>(
       <div className={cn('flex flex-col gap-1.5', className)}>
         <label
           htmlFor={id}
-          className="text-foreground block cursor-pointer text-sm font-semibold select-none"
+          className="text-muted block cursor-pointer text-sm font-bold select-none"
         >
           {label}
           {required && <span className="text-foreground ml-0.5">*</span>}
         </label>
         <Input id={id} ref={ref} error={!!error} {...props} />
-        {error && <p className="text-destructive text-xs font-medium">{error}</p>}
+        {error && <p className="text-destructive text-xs font-semibold">{error}</p>}
       </div>
     )
   },

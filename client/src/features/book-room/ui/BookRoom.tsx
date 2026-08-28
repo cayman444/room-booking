@@ -11,11 +11,10 @@ import { FieldTitle } from './FieldTitle'
 
 interface BookRoomProps {
   room: Room
-  onSuccess?: () => void
-  onCancel?: () => void
+  onClose: () => void
 }
 
-export const BookRoom: FC<BookRoomProps> = ({ room, onSuccess, onCancel }) => {
+export const BookRoom: FC<BookRoomProps> = ({ room, onClose }) => {
   const {
     form,
     watchedDate,
@@ -24,7 +23,7 @@ export const BookRoom: FC<BookRoomProps> = ({ room, onSuccess, onCancel }) => {
     handleDateChange,
     handleStartTimeChange,
     handleDurationChange,
-  } = useBookRoom({ room, onSuccess })
+  } = useBookRoom({ room, onClose })
 
   const {
     register,
@@ -33,33 +32,41 @@ export const BookRoom: FC<BookRoomProps> = ({ room, onSuccess, onCancel }) => {
 
   return (
     <>
-      <form className="flex flex-col gap-5">
-        <FieldTitle registration={register('title')} error={errors.title?.message} />
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <FieldDate value={watchedDate} onChange={handleDateChange} error={errors.date?.message} />
-          <FieldStartTime
-            value={watchedStartTime}
-            onChange={handleStartTimeChange}
-            error={errors.startTime?.message}
+      <form className="flex flex-col gap-6">
+        <div className="flex flex-col gap-5">
+          <FieldTitle registration={register('title')} error={errors.title?.message} />
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <FieldDate
+              value={watchedDate}
+              onChange={handleDateChange}
+              error={errors.date?.message}
+            />
+            <FieldStartTime
+              value={watchedStartTime}
+              onChange={handleStartTimeChange}
+              error={errors.startTime?.message}
+            />
+          </div>
+          <FieldDuration
+            value={watchedDuration}
+            startTime={watchedStartTime}
+            onChange={handleDurationChange}
+            error={errors.duration?.message}
           />
+          <FieldComment registration={register('comment')} error={errors.comment?.message} />
         </div>
-        <FieldDuration
-          value={watchedDuration}
-          startTime={watchedStartTime}
-          onChange={handleDurationChange}
-          error={errors.duration?.message}
-        />
-        <FieldComment registration={register('comment')} error={errors.comment?.message} />
         <BookingSummary
           date={watchedDate}
           startTime={watchedStartTime}
           duration={watchedDuration}
         />
         <div className="flex items-center justify-end gap-3 pt-2">
-          <Button type="button" variant="outline" onClick={onCancel}>
+          <Button type="button" variant="outline" onClick={onClose} className="px-6 py-2.5">
             Отмена
           </Button>
-          <Button type="submit">Забронировать</Button>
+          <Button type="submit" className="px-6 py-2.5">
+            Забронировать
+          </Button>
         </div>
       </form>
 

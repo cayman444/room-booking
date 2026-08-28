@@ -1,12 +1,6 @@
 import type { FC } from 'react'
 import type { Room } from '@/entities/rooms'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/shared/ui'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/shared/ui'
 import { BookRoom } from './BookRoom'
 
 interface BookRoomModalProps {
@@ -15,11 +9,7 @@ interface BookRoomModalProps {
   currentRoom?: Room | null
 }
 
-export const BookRoomModal: FC<BookRoomModalProps> = ({
-  isOpen,
-  currentRoom,
-  onOpenChange,
-}) => {
+export const BookRoomModal: FC<BookRoomModalProps> = ({ isOpen, currentRoom, onOpenChange }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent>
@@ -27,21 +17,13 @@ export const BookRoomModal: FC<BookRoomModalProps> = ({
           <DialogTitle>Новое бронирование</DialogTitle>
           {currentRoom && (
             <DialogDescription className="text-muted text-sm font-normal">
-              Переговорная:{' '}
-              <span className="text-primary font-bold">{currentRoom.name}</span>{' '}
-              ({currentRoom.office.name}, {currentRoom.floor} этаж)
+              Переговорная: <span className="text-primary font-bold">{currentRoom.name}</span> (
+              {currentRoom.office.name}, {currentRoom.floor} этаж)
             </DialogDescription>
           )}
         </DialogHeader>
-        {currentRoom && (
-          <BookRoom
-            room={currentRoom}
-            onSuccess={() => onOpenChange(false)}
-            onCancel={() => onOpenChange(false)}
-          />
-        )}
+        {currentRoom && <BookRoom room={currentRoom} onClose={() => onOpenChange(false)} />}
       </DialogContent>
     </Dialog>
   )
 }
-
