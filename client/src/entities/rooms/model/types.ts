@@ -12,7 +12,7 @@ export interface Room {
   floor: number
   capacity: number
   features: {
-    code: string
+    code: RoomFeaturesCode
     name: string
   }[]
   office: {
@@ -23,3 +23,5 @@ export interface Room {
   }
   available: boolean
 }
+
+export type RoomFeaturesCode = 'display' | 'whiteboard' | 'video'

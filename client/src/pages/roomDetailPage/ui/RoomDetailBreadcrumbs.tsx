@@ -10,12 +10,12 @@ import {
 } from '@/shared/ui'
 
 interface RoomDetailBreadcrumbsProps {
-  room?: Room
+  room: Room
 }
 
 export const RoomDetailBreadcrumbs = ({ room }: RoomDetailBreadcrumbsProps) => {
   return (
-    <Breadcrumb className="mb-2">
+    <Breadcrumb>
       <BreadcrumbList className="text-muted text-sm">
         <BreadcrumbItem>
           <BreadcrumbLink asChild className="hover:text-foreground">
@@ -24,12 +24,12 @@ export const RoomDetailBreadcrumbs = ({ room }: RoomDetailBreadcrumbsProps) => {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <span className="text-muted">{room?.office.name || 'Офис'}</span>
+          <span className="text-muted">{room.office.name || 'Офис'}</span>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage className="text-foreground font-medium">
-            Комната &apos;{room?.name || '...'}&apos;
+          <BreadcrumbPage className="text-foreground font-semibold">
+            Комната '{room.name || '...'}'
           </BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>

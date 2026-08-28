@@ -7,6 +7,7 @@ export function RoomDetailPage() {
   const { roomDetails, isLoading } = useRoomDetail()
 
   if (isLoading) return 'loading...'
+  if (!roomDetails) return null
 
   return (
     <div className="flex flex-1 flex-col gap-3 px-10 py-6">

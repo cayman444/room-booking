@@ -1,29 +1,31 @@
-import { Monitor, PenTool, Tv, Users, Video } from 'lucide-react'
+import { Package, PenLine, Tv, Users, Video } from 'lucide-react'
 import type { FC, ReactNode } from 'react'
-import type { Room } from '../model/types'
+import type { Room, RoomFeaturesCode } from '../model/types'
 
 interface RoomInfoProps {
-  room?: Room
+  room: Room
 }
 
-const FEATURE_ICONS: Record<string, ReactNode> = {
+const FEATURE_ICONS: Record<RoomFeaturesCode, ReactNode> = {
   display: <Tv className="text-primary size-5 shrink-0" />,
-  monitor: <Monitor className="text-primary size-5 shrink-0" />,
-  whiteboard: <PenTool className="text-primary size-5 shrink-0" />,
+  whiteboard: <PenLine className="text-primary size-5 shrink-0" />,
   video: <Video className="text-primary size-5 shrink-0" />,
 }
 
 export const RoomInfo: FC<RoomInfoProps> = ({ room }) => {
-  if (!room) return null
+  const splittedAddress = room.office.address.split(',')
+  const formattedAddress = splittedAddress.length
+    ? splittedAddress.slice(1).join(',')
+    : room.office.address
 
   return (
-    <div className="bg-card border-border flex flex-col rounded-[20px] border p-8 shadow-sm">
+    <div className="bg-card border-border flex flex-col rounded-2xl border p-6">
       <h1 className="text-foreground text-2xl font-extrabold tracking-tight">{room.name}</h1>
-      <p className="text-muted mt-1 text-sm">
-        {room.office.name} · {room.office.address} ({room.floor} этаж)
+      <p className="text-muted mt-2 text-sm">
+        {room.office.name} · {formattedAddress}
       </p>
-      <hr className="border-border my-6" />
-      <div className="flex flex-col gap-4">
+      <hr className="border-border my-5" />
+      <div className="flex flex-col gap-3">
         <div className="flex items-center gap-3">
           <Users className="text-primary size-5 shrink-0" />
           <span className="text-foreground text-sm font-medium">
@@ -32,7 +34,7 @@ export const RoomInfo: FC<RoomInfoProps> = ({ room }) => {
         </div>
         {room.features?.map((feature) => (
           <div key={feature.code} className="flex items-center gap-3">
-            {FEATURE_ICONS[feature.code] || <Monitor className="text-primary size-5 shrink-0" />}
+            {FEATURE_ICONS[feature.code] || <Package className="text-primary size-5 shrink-0" />}
             <span className="text-foreground text-sm font-medium">{feature.name}</span>
           </div>
         ))}
