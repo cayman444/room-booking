@@ -41,6 +41,14 @@ export const DEFAULT_DURATION_OPTIONS = [
   { value: '120', label: '2 часа' },
 ] as const
 
+export const DURATION_LABELS = DEFAULT_DURATION_OPTIONS.reduce<Record<string, string>>(
+  (acc, { label, value }) => {
+    acc[value] = label
+    return acc
+  },
+  {},
+)
+
 export const DEFAULT_TIME_SLOTS = [
   '09:00',
   '09:15',

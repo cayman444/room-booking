@@ -20,7 +20,7 @@ export const useBookForm = (onSubmitCallback: (values: BookRoomFormValues) => vo
       duration: defaultDuration,
       comment: '',
     },
-    mode: 'onTouched',
+    mode: 'onSubmit',
   })
 
   const watchedDate = useWatch({ control: form.control, name: 'date' })

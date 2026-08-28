@@ -7,7 +7,7 @@ import {
   parse,
   startOfDay,
 } from 'date-fns'
-import { RU_MONTHS_GENITIVE, RU_WEEKDAYS_ON, RU_WEEKDAYS_SHORT } from './consts'
+import { DURATION_LABELS, RU_MONTHS_GENITIVE, RU_WEEKDAYS_ON, RU_WEEKDAYS_SHORT } from './consts'
 
 export function formatDateToYMD(date: Date = new Date()): string {
   return format(date, 'yyyy-MM-dd')
@@ -76,7 +76,7 @@ export function formatBookingSummary(
   const day = startDate.getDate()
   const month = RU_MONTHS_GENITIVE[startDate.getMonth()]
 
-  const durationText = `${durationMinutes} минут`
+  const durationText = DURATION_LABELS[durationMinutes.toString()] ?? `${durationMinutes} минут`
 
   return `Бронирование на ${weekday}, ${day} ${month}, ${startTimeStr} - ${endTimeStr} (${durationText})`
 }
