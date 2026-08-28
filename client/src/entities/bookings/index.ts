@@ -1,2 +1,2 @@
-export * from './api/bookingsApi'
+export * from './api/useCreateBooking'
 export * from './model/types'

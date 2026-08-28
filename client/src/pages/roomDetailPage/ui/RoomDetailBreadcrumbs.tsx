@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+import type { Room } from '@/entities/rooms'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -7,20 +9,28 @@ import {
   BreadcrumbSeparator,
 } from '@/shared/ui'
 
-export const RoomDetailBreadcrumbs = () => {
+interface RoomDetailBreadcrumbsProps {
+  room?: Room
+}
+
+export const RoomDetailBreadcrumbs = ({ room }: RoomDetailBreadcrumbsProps) => {
   return (
-    <Breadcrumb>
-      <BreadcrumbList>
+    <Breadcrumb className="mb-2">
+      <BreadcrumbList className="text-muted text-sm">
         <BreadcrumbItem>
-          <BreadcrumbLink href="#">Home</BreadcrumbLink>
+          <BreadcrumbLink asChild className="hover:text-foreground">
+            <Link to="/rooms">Переговорные</Link>
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href="#">Components</BreadcrumbLink>
+          <span className="text-muted">{room?.office.name || 'Офис'}</span>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+          <BreadcrumbPage className="text-foreground font-medium">
+            Комната &apos;{room?.name || '...'}&apos;
+          </BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
