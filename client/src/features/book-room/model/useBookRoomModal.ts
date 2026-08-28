@@ -12,14 +12,10 @@ export function useBookRoomModal() {
 
   const closeBookModal = () => {
     setIsOpen(false)
-    setSelectedRoom(null)
   }
 
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open)
-    if (!open) {
-      setSelectedRoom(null)
-    }
   }
 
   return {
