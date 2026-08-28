@@ -9,7 +9,8 @@ interface ApiResponse {
 export function useOffices() {
   return useQuery<ApiResponse, Error, Office[]>({
     queryKey: ['offices'],
-    queryFn: () => apiClient.get<ApiResponse>('/offices'),
+    queryFn: () => apiClient.get<ApiResponse>('/offices').then((res) => res.data),
     select: (data) => data.items,
   })
 }
+

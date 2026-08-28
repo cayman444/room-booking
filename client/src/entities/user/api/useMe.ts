@@ -5,6 +5,7 @@ import type { User } from '../model/types'
 export function useMe() {
   return useQuery<User>({
     queryKey: ['me'],
-    queryFn: () => apiClient.get('/me'),
+    queryFn: () => apiClient.get<User>('/me').then((res) => res.data),
   })
 }
+
