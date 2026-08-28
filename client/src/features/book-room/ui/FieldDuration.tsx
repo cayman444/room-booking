@@ -26,7 +26,7 @@ export const FieldDuration: FC<FieldDurationProps> = ({ value, onChange, error }
         <SelectContent className="max-h-60">
           {DEFAULT_DURATION_OPTIONS.map((option) => (
             <SelectItem key={option.value} value={String(option.value)}>
-              {option.value}
+              {option.label}
             </SelectItem>
           ))}
         </SelectContent>

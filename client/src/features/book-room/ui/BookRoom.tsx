@@ -1,7 +1,8 @@
 import type { FC } from 'react'
 import type { Room } from '@/entities/rooms'
 import { Button } from '@/shared/ui'
-import { useBookRoom } from '../model/useBookRoom'
+import { useBookForm } from '../model/useBookForm'
+import { useCreateBook } from '../model/useCreateBook'
 import { BookingSummary } from './BookingSummary'
 import { FieldComment } from './FieldComment'
 import { FieldDate } from './FieldDate'
@@ -15,24 +16,22 @@ interface BookRoomProps {
 }
 
 export const BookRoom: FC<BookRoomProps> = ({ room, onClose }) => {
+  const { isSubmitting, serverError, handleCreateBook } = useCreateBook({ room, onClose })
   const {
-    form,
     watchedDate,
-    watchedStartTime,
     watchedDuration,
+    watchedStartTime,
+    errors,
     handleDateChange,
-    handleStartTimeChange,
     handleDurationChange,
-  } = useBookRoom({ room, onClose })
-
-  const {
+    handleStartTimeChange,
+    onSubmit,
     register,
-    formState: { errors },
-  } = form
+  } = useBookForm(handleCreateBook)
 
   return (
     <>
-      <form className="flex flex-col gap-6">
+      <form onSubmit={onSubmit} className="flex flex-col gap-6">
         <div className="flex flex-col gap-5">
           <FieldTitle registration={register('title')} error={errors.title?.message} />
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -60,12 +59,21 @@ export const BookRoom: FC<BookRoomProps> = ({ room, onClose }) => {
           startTime={watchedStartTime}
           duration={watchedDuration}
         />
+        {serverError && (
+          <p className="text-destructive text-center text-sm font-medium">{serverError}</p>
+        )}
         <div className="flex items-center justify-end gap-3 pt-2">
-          <Button type="button" variant="outline" onClick={onClose} className="px-6 py-2.5">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={onClose}
+            disabled={isSubmitting}
+            className="px-6 py-2.5"
+          >
             Отмена
           </Button>
-          <Button type="submit" className="px-6 py-2.5">
-            Забронировать
+          <Button type="submit" disabled={isSubmitting} className="px-6 py-2.5">
+            {isSubmitting ? 'Бронирование...' : 'Забронировать'}
           </Button>
         </div>
       </form>

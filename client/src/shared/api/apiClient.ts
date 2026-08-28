@@ -1,5 +1,4 @@
 import axios, { type AxiosRequestConfig } from 'axios'
-import { ApiError } from './apiError'
 
 export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1'
 
@@ -7,12 +6,7 @@ const instance = axios.create({
   baseURL: API_BASE_URL,
 })
 
-instance.interceptors.response.use(
-  (response) => response.data,
-  (error) => {
-    return Promise.reject(ApiError.fromAxiosError(error))
-  },
-)
+instance.interceptors.response.use((response) => response.data)
 
 export const apiClient = {
   get: <T>(url: string, config?: AxiosRequestConfig): Promise<T> =>
