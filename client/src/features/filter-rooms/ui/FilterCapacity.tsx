@@ -1,6 +1,6 @@
 import { Users } from 'lucide-react'
+import { DEFAULT_CAPACITY_OPTIONS } from '@/shared/lib/date/consts'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui'
-import { DEFAULT_CAPACITY_OPTIONS } from '../model/consts'
 
 interface FilterCapacityProps {
   value?: string

@@ -1,6 +1,6 @@
 import { Clock } from 'lucide-react'
+import { DEFAULT_TIME_SLOTS } from '@/shared/lib/date/consts'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui'
-import { DEFAULT_TIME_SLOTS } from '../model/consts'
 
 interface FilterStartTimeProps {
   value?: string

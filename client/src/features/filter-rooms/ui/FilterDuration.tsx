@@ -1,5 +1,5 @@
+import { DEFAULT_DURATION_OPTIONS } from '@/shared/lib/date/consts'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui'
-import { DEFAULT_DURATION_OPTIONS } from '../model/consts'
 
 interface FilterDurationProps {
   value?: string
