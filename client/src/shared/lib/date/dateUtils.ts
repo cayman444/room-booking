@@ -7,7 +7,7 @@ import {
   parse,
   startOfDay,
 } from 'date-fns'
-import { RU_MONTHS_GENITIVE, RU_WEEKDAYS_SHORT } from './consts'
+import { RU_MONTHS_GENITIVE, RU_WEEKDAYS_ON, RU_WEEKDAYS_SHORT } from './consts'
 
 export function formatDateToYMD(date: Date = new Date()): string {
   return format(date, 'yyyy-MM-dd')
@@ -58,6 +58,27 @@ export function calculateIntervalIso(
   } catch {
     return { from: undefined, to: undefined }
   }
+}
+
+export function formatBookingSummary(
+  dateInput: Date | string,
+  startTimeStr: string,
+  durationMinutes: number,
+): string {
+  const date = typeof dateInput === 'string' ? parseYMDToDate(dateInput) : dateInput
+  const dateStr = formatDateToYMD(date)
+
+  const startDate = parse(`${dateStr} ${startTimeStr}`, 'yyyy-MM-dd HH:mm', new Date())
+  const endDate = addMinutes(startDate, durationMinutes)
+  const endTimeStr = format(endDate, 'HH:mm')
+
+  const weekday = RU_WEEKDAYS_ON[startDate.getDay()]
+  const day = startDate.getDate()
+  const month = RU_MONTHS_GENITIVE[startDate.getMonth()]
+
+  const durationText = `${durationMinutes} минут`
+
+  return `Бронирование на ${weekday}, ${day} ${month}, ${startTimeStr} - ${endTimeStr} (${durationText})`
 }
 
 export function isBookingDateAllowed(date: Date, maxDaysAhead = 30): boolean {

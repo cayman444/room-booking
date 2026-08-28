@@ -2,6 +2,7 @@ import { addDays, subDays } from 'date-fns'
 import { describe, expect, it } from 'vitest'
 import {
   calculateIntervalIso,
+  formatBookingSummary,
   formatDateDisplay,
   formatDateToYMD,
   isBookingDateAllowed,
@@ -47,5 +48,17 @@ describe('dateUtils', () => {
     expect(isBookingDateAllowed(withinLimit)).toBe(true)
     expect(isBookingDateAllowed(pastDate)).toBe(false)
     expect(isBookingDateAllowed(beyondLimit)).toBe(false)
+  })
+
+  it('formatBookingSummary generates summary string matching Figma mockup', () => {
+    expect(formatBookingSummary('2026-10-20', '15:00', 60)).toBe(
+      'Бронирование на Вторник, 20 Октября, 15:00 - 16:00 (1 час)',
+    )
+    expect(formatBookingSummary('2026-10-18', '15:00', 60)).toBe(
+      'Бронирование на Воскресенье, 18 Октября, 15:00 - 16:00 (1 час)',
+    )
+    expect(formatBookingSummary('2026-10-24', '11:00', 30)).toBe(
+      'Бронирование на Субботу, 24 Октября, 11:00 - 11:30 (30 минут)',
+    )
   })
 })
