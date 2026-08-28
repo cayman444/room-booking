@@ -1,4 +1,5 @@
 import { RoomCard } from '@/entities/rooms'
+import { BookRoomModal } from '@/features/book-room'
 import { useAvailableRooms } from '../model/useAvailableRooms'
 import { EmptyNoOffice } from './EmptyNoOffice'
 import { EmptyRooms } from './EmptyRooms'
@@ -6,8 +7,19 @@ import { RoomsError } from './RoomsError'
 import { RoomsLoading } from './RoomsLoading'
 
 export const AvailableRooms = () => {
-  const { rooms, officeId, isLoading, error, isError, refetch, handleResetFilters } =
-    useAvailableRooms()
+  const {
+    rooms,
+    officeId,
+    isLoading,
+    error,
+    isError,
+    modalBookOpen,
+    currentRoom,
+    refetch,
+    handleResetFilters,
+    handleChangeModalOpen,
+    handleOpenModal,
+  } = useAvailableRooms()
 
   if (!officeId) {
     return <EmptyNoOffice />
@@ -32,9 +44,14 @@ export const AvailableRooms = () => {
       </h2>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {rooms.map((room) => (
-          <RoomCard key={room.id} room={room} />
+          <RoomCard key={room.id} room={room} onBook={handleOpenModal} />
         ))}
       </div>
+      <BookRoomModal
+        isOpen={modalBookOpen}
+        onOpenChange={handleChangeModalOpen}
+        currentRoom={currentRoom}
+      />
     </div>
   )
 }

@@ -7,7 +7,7 @@ import type { Room } from '../model/types'
 
 interface RoomCardProps {
   room: Room
-  onBook?: (roomId: string) => void
+  onBook?: (room: Room) => void
 }
 
 export const RoomCard: FC<RoomCardProps> = ({ room, onBook }) => {
@@ -49,7 +49,7 @@ export const RoomCard: FC<RoomCardProps> = ({ room, onBook }) => {
           </Button>
           <Button
             disabled={!isAvailable}
-            onClick={() => onBook?.(room.id)}
+            onClick={() => onBook?.(room)}
             className={!isAvailable ? 'cursor-not-allowed opacity-50' : ''}
           >
             Забронировать
