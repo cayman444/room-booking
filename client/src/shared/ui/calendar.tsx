@@ -51,15 +51,15 @@ function Calendar({
           defaultClassNames.day,
         ),
         day_button: cn(
-          'h-8 w-8 p-0 text-sm font-medium rounded-lg hover:bg-accent hover:text-foreground transition-colors cursor-pointer flex items-center justify-center',
+          'h-8 w-8 p-0 text-sm font-medium rounded-lg hover:bg-accent transition-colors cursor-pointer flex items-center justify-center',
           defaultClassNames.day_button,
         ),
         selected: cn(
-          'bg-primary text-primary-foreground font-bold hover:bg-primary-hover rounded-lg [&>button]:bg-primary [&>button]:text-primary-foreground [&>button]:hover:bg-primary-hover',
+          'bg-primary text-primary-foreground font-bold rounded-lg [&>button]:hover:bg-primary [&>button]:cursor-default',
           defaultClassNames.selected,
         ),
         today: defaultClassNames.today,
-        outside: cn('text-slate-300 opacity-40', defaultClassNames.outside),
+        outside: cn('opacity-40', defaultClassNames.outside),
         disabled: cn(
           'text-slate-300 opacity-30 cursor-not-allowed pointer-events-none',
           defaultClassNames.disabled,
@@ -68,9 +68,7 @@ function Calendar({
         ...classNames,
       }}
       modifiersClassNames={{
-        selected:
-          'bg-primary text-primary-foreground font-bold hover:bg-primary-hover rounded-lg [&>button]:bg-primary [&>button]:text-primary-foreground [&>button]:hover:bg-primary-hover',
-        ...modifiersClassNames,
+        selected: cn(modifiersClassNames),
       }}
       components={{
         Chevron: ({ orientation, className: chevronClassName }) => {

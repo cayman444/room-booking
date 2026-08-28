@@ -18,7 +18,16 @@ interface FilterDateProps {
 export function FilterDate({ value, onChange, disabled }: FilterDateProps) {
   const [open, setOpen] = useState(false)
   const selectedDate = value ? parseYMDToDate(value) : new Date()
+  const [month, setMonth] = useState<Date>(selectedDate)
   const dateToDisplay = formatDateDisplay(selectedDate)
+
+  const handleOpenChange = (isOpen: boolean) => {
+    if (isOpen) {
+      setMonth(selectedDate)
+    }
+
+    setOpen(isOpen)
+  }
 
   const handleSelectDate = (date?: Date) => {
     if (date) {
@@ -30,7 +39,7 @@ export function FilterDate({ value, onChange, disabled }: FilterDateProps) {
   return (
     <div className="flex flex-col gap-1.5">
       <span className="text-subtle text-xs font-bold tracking-wider uppercase">Дата</span>
-      <Select open={open} onOpenChange={setOpen} disabled={disabled}>
+      <Select open={open} onOpenChange={handleOpenChange} disabled={disabled}>
         <SelectTrigger>
           <div className="flex items-center gap-2">
             <CalendarIcon className="text-muted size-4 stroke-3" />
@@ -42,8 +51,12 @@ export function FilterDate({ value, onChange, disabled }: FilterDateProps) {
             mode="single"
             locale={ru}
             selected={selectedDate}
+            month={month}
+            onMonthChange={setMonth}
+            defaultMonth={selectedDate}
             onSelect={handleSelectDate}
             disabled={(date) => !isBookingDateAllowed(date)}
+            showOutsideDays={false}
           />
         </SelectContent>
       </Select>
