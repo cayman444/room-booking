@@ -31,27 +31,48 @@ const DialogContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
     showClose?: boolean
   }
->(({ className, children, showClose = false, ...props }, ref) => (
-  <DialogPortal>
-    <DialogOverlay />
-    <DialogPrimitive.Content
-      ref={ref}
-      className={cn(
-        'animate-dialog-content bg-card border-border/80 fixed top-[50%] left-[50%] z-50 grid w-full max-w-140 gap-6 rounded-[20px] border p-8 shadow-2xl outline-none will-change-[transform,opacity]',
-        className,
-      )}
-      {...props}
-    >
-      {children}
-      {showClose && (
-        <DialogPrimitive.Close className="text-muted hover:text-foreground absolute top-6 right-6 rounded-lg opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none">
-          <X className="size-5" />
-          <span className="sr-only">Закрыть</span>
-        </DialogPrimitive.Close>
-      )}
-    </DialogPrimitive.Content>
-  </DialogPortal>
-))
+>(
+  (
+    { className, children, showClose = false, onPointerDownOutside, onInteractOutside, ...props },
+    ref,
+  ) => (
+    <DialogPortal>
+      <DialogOverlay />
+      <DialogPrimitive.Content
+        ref={ref}
+        className={cn(
+          'animate-dialog-content bg-card border-border/80 fixed top-[50%] left-[50%] z-50 grid w-full max-w-140 gap-6 rounded-[20px] border p-8 shadow-2xl will-change-[transform,opacity] outline-none',
+          className,
+        )}
+        onPointerDownOutside={(e) => {
+          const target = e.target as HTMLElement | null
+          if (target?.closest?.('[data-sonner-toaster], [data-sonner-toast], .toaster')) {
+            e.preventDefault()
+            return
+          }
+          onPointerDownOutside?.(e)
+        }}
+        onInteractOutside={(e) => {
+          const target = e.target as HTMLElement | null
+          if (target?.closest?.('[data-sonner-toaster], [data-sonner-toast], .toaster')) {
+            e.preventDefault()
+            return
+          }
+          onInteractOutside?.(e)
+        }}
+        {...props}
+      >
+        {children}
+        {showClose && (
+          <DialogPrimitive.Close className="text-muted hover:text-foreground absolute top-6 right-6 rounded-lg opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none">
+            <X className="size-5" />
+            <span className="sr-only">Закрыть</span>
+          </DialogPrimitive.Close>
+        )}
+      </DialogPrimitive.Content>
+    </DialogPortal>
+  ),
+)
 DialogContent.displayName = DialogPrimitive.Content.displayName
 
 const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
