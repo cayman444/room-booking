@@ -1,5 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 import { useRooms } from '@/entities/rooms'
+import { getErrorMessage } from '@/shared/api'
 import { SEARCH_PARAM_KEYS } from '@/shared/config'
 import { calculateIntervalIso, formatDateToYMD } from '@/shared/lib/date'
 
@@ -45,6 +46,7 @@ export const useAvailableRooms = () => {
     isLoading,
     isError,
     error,
+    errorMessage: error ? getErrorMessage(error) : undefined,
     refetch,
     handleResetFilters,
   }

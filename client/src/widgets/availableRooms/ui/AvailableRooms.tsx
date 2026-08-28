@@ -7,7 +7,7 @@ import { RoomsError } from './RoomsError'
 import { RoomsLoading } from './RoomsLoading'
 
 export const AvailableRooms = () => {
-  const { rooms, officeId, isLoading, error, isError, refetch, handleResetFilters } =
+  const { rooms, officeId, isLoading, isError, errorMessage, refetch, handleResetFilters } =
     useAvailableRooms()
   const {
     isOpen: modalBookOpen,
@@ -25,7 +25,7 @@ export const AvailableRooms = () => {
   }
 
   if (isError) {
-    return <RoomsError message={error?.message} onRetry={refetch} />
+    return <RoomsError message={errorMessage} onRetry={refetch} />
   }
 
   if (rooms.length === 0) {

@@ -3,6 +3,7 @@ import type { Room } from '@/entities/rooms'
 import { Button } from '@/shared/ui'
 import { useBookForm } from '../model/useBookForm'
 import { useCreateBook } from '../model/useCreateBook'
+import { BookingConflictModal } from './BookingConflictModal'
 import { BookingSummary } from './BookingSummary'
 import { FieldComment } from './FieldComment'
 import { FieldDate } from './FieldDate'
@@ -16,7 +17,8 @@ interface BookRoomProps {
 }
 
 export const BookRoom: FC<BookRoomProps> = ({ room, onClose }) => {
-  const { isSubmitting, serverError, handleCreateBook } = useCreateBook({ room, onClose })
+  const { isSubmitting, serverError, handleCreateBook, isConflictModalOpen, closeConflictModal } =
+    useCreateBook({ room, onClose })
   const {
     watchedDate,
     watchedDuration,
@@ -77,8 +79,7 @@ export const BookRoom: FC<BookRoomProps> = ({ room, onClose }) => {
           </Button>
         </div>
       </form>
-
-      {/* <BookingConflictModal  /> */}
+      <BookingConflictModal isOpen={isConflictModalOpen} onClose={closeConflictModal} />
     </>
   )
 }
