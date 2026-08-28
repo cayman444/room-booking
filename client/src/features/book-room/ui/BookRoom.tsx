@@ -4,6 +4,7 @@ import { Button } from '@/shared/ui'
 import { useBookForm } from '../model/useBookForm'
 import { useCreateBook } from '../model/useCreateBook'
 import { BookingConflictModal } from './BookingConflictModal'
+import { BookingError } from './BookingError'
 import { BookingSummary } from './BookingSummary'
 import { FieldComment } from './FieldComment'
 import { FieldDate } from './FieldDate'
@@ -56,14 +57,14 @@ export const BookRoom: FC<BookRoomProps> = ({ room, onClose }) => {
           />
           <FieldComment registration={register('comment')} error={errors.comment?.message} />
         </div>
-        <BookingSummary
-          date={watchedDate}
-          startTime={watchedStartTime}
-          duration={watchedDuration}
-        />
-        {serverError && (
-          <p className="text-destructive text-center text-sm font-medium">{serverError}</p>
-        )}
+        <div className="space-y-2">
+          <BookingSummary
+            date={watchedDate}
+            startTime={watchedStartTime}
+            duration={watchedDuration}
+          />
+          {serverError && <BookingError error={serverError} />}
+        </div>
         <div className="flex items-center justify-end gap-3 pt-2">
           <Button
             type="button"
