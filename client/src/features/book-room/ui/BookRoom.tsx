@@ -3,7 +3,6 @@ import type { Room } from '@/entities/rooms'
 import { Button } from '@/shared/ui'
 import { useBookForm } from '../model/useBookForm'
 import { useCreateBook } from '../model/useCreateBook'
-import { BookingError } from './BookingError'
 import { BookingSummary } from './BookingSummary'
 import { FieldComment } from './FieldComment'
 import { FieldDate } from './FieldDate'
@@ -17,7 +16,7 @@ interface BookRoomProps {
 }
 
 export const BookRoom: FC<BookRoomProps> = ({ room, onClose }) => {
-  const { isSubmitting, serverError, handleCreateBook } = useCreateBook({ room, onClose })
+  const { isSubmitting, handleCreateBook } = useCreateBook({ room, onClose })
   const {
     watchedDate,
     watchedDuration,
@@ -50,14 +49,7 @@ export const BookRoom: FC<BookRoomProps> = ({ room, onClose }) => {
         />
         <FieldComment registration={register('comment')} error={errors.comment?.message} />
       </div>
-      <div className="space-y-2">
-        <BookingSummary
-          date={watchedDate}
-          startTime={watchedStartTime}
-          duration={watchedDuration}
-        />
-        {serverError && <BookingError error={serverError} />}
-      </div>
+      <BookingSummary date={watchedDate} startTime={watchedStartTime} duration={watchedDuration} />
       <div className="flex items-center justify-end gap-3">
         <Button
           type="button"

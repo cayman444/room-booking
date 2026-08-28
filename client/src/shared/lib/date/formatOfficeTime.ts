@@ -1,3 +1,5 @@
+import { formatTimezoneShort } from './dateUtils'
+
 export function formatOfficeTime(timezone?: string, date: Date = new Date()): string {
   if (!timezone) return '--'
 
@@ -9,10 +11,9 @@ export function formatOfficeTime(timezone?: string, date: Date = new Date()): st
       hour12: false,
     }).format(date)
 
-    const tzShort = timezone.includes('Moscow') ? 'MSK' : timezone.split('/')[1] || timezone
-
-    return `${timeStr} ${tzShort}`
+    return `${timeStr} ${formatTimezoneShort(timezone)}`
   } catch {
     return '--'
   }
 }
+

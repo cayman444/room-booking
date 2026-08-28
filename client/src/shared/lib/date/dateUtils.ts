@@ -60,25 +60,66 @@ export function calculateIntervalIso(
   }
 }
 
-export function formatBookingSummary(
+export function getBookingIntervalInfo(
   dateInput: Date | string,
   startTimeStr: string,
   durationMinutes: number,
-): string {
+) {
   const date = typeof dateInput === 'string' ? parseYMDToDate(dateInput) : dateInput
   const dateStr = formatDateToYMD(date)
 
   const startDate = parse(`${dateStr} ${startTimeStr}`, 'yyyy-MM-dd HH:mm', new Date())
   const endDate = addMinutes(startDate, durationMinutes)
-  const endTimeStr = format(endDate, 'HH:mm')
 
-  const weekday = RU_WEEKDAYS_ON[startDate.getDay()]
-  const day = startDate.getDate()
-  const month = RU_MONTHS_GENITIVE[startDate.getMonth()]
+  return {
+    startDate,
+    endDate,
+    day: startDate.getDate(),
+    month: RU_MONTHS_GENITIVE[startDate.getMonth()],
+    weekday: RU_WEEKDAYS_ON[startDate.getDay()],
+    startTime: startTimeStr,
+    endTime: format(endDate, 'HH:mm'),
+    durationText: DURATION_LABELS[durationMinutes.toString()] ?? `${durationMinutes} минут`,
+  }
+}
 
-  const durationText = DURATION_LABELS[durationMinutes.toString()] ?? `${durationMinutes} минут`
+export function formatBookingSummary(
+  dateInput: Date | string,
+  startTimeStr: string,
+  durationMinutes: number,
+): string {
+  const { weekday, day, month, startTime, endTime, durationText } = getBookingIntervalInfo(
+    dateInput,
+    startTimeStr,
+    durationMinutes,
+  )
 
-  return `Бронирование на ${weekday}, ${day} ${month}, ${startTimeStr} - ${endTimeStr} (${durationText})`
+  return `Бронирование на ${weekday}, ${day} ${month}, ${startTime} - ${endTime} (${durationText})`
+}
+
+export function formatTimezoneShort(timezone?: string): string {
+  if (!timezone) return ''
+  if (timezone.includes('Moscow')) return 'MSK'
+  return timezone.split('/')[1] || timezone
+}
+
+export function formatBookingToastDescription(
+  roomName: string,
+  dateInput: Date | string,
+  startTimeStr: string,
+  durationMinutes: number,
+  timezone?: string,
+): string {
+  const { day, month, startTime, endTime } = getBookingIntervalInfo(
+    dateInput,
+    startTimeStr,
+    durationMinutes,
+  )
+
+  const tzShort = formatTimezoneShort(timezone)
+  const tzSuffix = tzShort ? ` ${tzShort}` : ''
+
+  return `Комната ${roomName}, ${day} ${month.toLowerCase()}, ${startTime}–${endTime}${tzSuffix}`
 }
 
 export function isBookingDateAllowed(date: Date, maxDaysAhead = 30): boolean {

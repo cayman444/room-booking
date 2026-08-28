@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom'
+import { Toaster } from '@/shared/ui'
 import { Header } from '@/widgets/header'
 
 export function RootLayout() {
@@ -8,6 +9,8 @@ export function RootLayout() {
       <main className="flex flex-1 flex-col">
         <Outlet />
       </main>
+      <Toaster />
     </div>
   )
 }
+

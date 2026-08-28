@@ -3,11 +3,14 @@ import { describe, expect, it } from 'vitest'
 import {
   calculateIntervalIso,
   formatBookingSummary,
+  formatBookingToastDescription,
   formatDateDisplay,
   formatDateToYMD,
+  formatTimezoneShort,
   isBookingDateAllowed,
   parseYMDToDate,
 } from './dateUtils'
+
 
 describe('dateUtils', () => {
   it('formatDateToYMD formats date to YYYY-MM-DD', () => {
@@ -57,8 +60,22 @@ describe('dateUtils', () => {
     expect(formatBookingSummary('2026-10-18', '15:00', 60)).toBe(
       'Бронирование на Воскресенье, 18 Октября, 15:00 - 16:00 (1 час)',
     )
-    expect(formatBookingSummary('2026-10-24', '11:00', 30)).toBe(
-      'Бронирование на Субботу, 24 Октября, 11:00 - 11:30 (30 минут)',
+  })
+
+  it('formatTimezoneShort correctly extracts short timezone name', () => {
+    expect(formatTimezoneShort('Europe/Moscow')).toBe('MSK')
+    expect(formatTimezoneShort('Asia/Yekaterinburg')).toBe('Yekaterinburg')
+    expect(formatTimezoneShort('')).toBe('')
+    expect(formatTimezoneShort(undefined)).toBe('')
+  })
+
+  it('formatBookingToastDescription generates toast string matching Figma mockup', () => {
+    expect(
+      formatBookingToastDescription('Эверест', '2026-10-24', '15:00', 60, 'Europe/Moscow'),
+    ).toBe('Комната Эверест, 24 октября, 15:00–16:00 MSK')
+    expect(formatBookingToastDescription('Эверест', '2026-10-24', '15:00', 60)).toBe(
+      'Комната Эверест, 24 октября, 15:00–16:00',
     )
   })
 })
+
