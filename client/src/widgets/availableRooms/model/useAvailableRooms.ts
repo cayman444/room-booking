@@ -1,17 +1,10 @@
 import { useSearchParams } from 'react-router-dom'
 import { useRooms } from '@/entities/rooms'
-import { useBookRoomModal } from '@/features/book-room'
 import { SEARCH_PARAM_KEYS } from '@/shared/config'
 import { calculateIntervalIso, formatDateToYMD } from '@/shared/lib/date'
 
 export const useAvailableRooms = () => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const {
-    isOpen: modalBookOpen,
-    selectedRoom: currentRoom,
-    openBookModal: handleOpenModal,
-    handleOpenChange: handleChangeModalOpen,
-  } = useBookRoomModal()
 
   const officeId = searchParams.get(SEARCH_PARAM_KEYS.OFFICE_ID) || ''
   const date = searchParams.get(SEARCH_PARAM_KEYS.DATE) || formatDateToYMD(new Date())
@@ -52,11 +45,7 @@ export const useAvailableRooms = () => {
     isLoading,
     isError,
     error,
-    modalBookOpen,
-    currentRoom,
     refetch,
     handleResetFilters,
-    handleChangeModalOpen,
-    handleOpenModal,
   }
 }

@@ -1,5 +1,5 @@
 import { RoomCard } from '@/entities/rooms'
-import { BookRoomModal } from '@/features/book-room'
+import { BookRoomModal, useBookRoomModal } from '@/features/book-room'
 import { useAvailableRooms } from '../model/useAvailableRooms'
 import { EmptyNoOffice } from './EmptyNoOffice'
 import { EmptyRooms } from './EmptyRooms'
@@ -7,19 +7,14 @@ import { RoomsError } from './RoomsError'
 import { RoomsLoading } from './RoomsLoading'
 
 export const AvailableRooms = () => {
+  const { rooms, officeId, isLoading, error, isError, refetch, handleResetFilters } =
+    useAvailableRooms()
   const {
-    rooms,
-    officeId,
-    isLoading,
-    error,
-    isError,
-    modalBookOpen,
-    currentRoom,
-    refetch,
-    handleResetFilters,
-    handleChangeModalOpen,
-    handleOpenModal,
-  } = useAvailableRooms()
+    isOpen: modalBookOpen,
+    selectedRoom: currentRoom,
+    openBookModal: handleOpenModal,
+    handleOpenChange: handleChangeModalOpen,
+  } = useBookRoomModal()
 
   if (!officeId) {
     return <EmptyNoOffice />
