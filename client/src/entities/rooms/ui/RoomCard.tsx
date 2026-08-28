@@ -2,6 +2,7 @@ import { Clock, Users } from 'lucide-react'
 import type { FC } from 'react'
 import { generatePath, Link } from 'react-router-dom'
 import { ROUTES_PATHS } from '@/shared/config'
+import { cn } from '@/shared/lib/utils'
 import { Button } from '@/shared/ui'
 import type { Room } from '../model/types'
 
@@ -30,17 +31,20 @@ export const RoomCard: FC<RoomCardProps> = ({ room, onBook }) => {
             <p>{isAvailable ? 'Свободна весь день' : 'Занята на выбранное время'}</p>
           </div>
         </div>
-        {isAvailable ? (
-          <div className="bg-available-bg text-available-fg flex items-center gap-2 rounded-lg p-2.5 text-xs font-semibold">
-            <span className="bg-available-fg size-1.5 rounded-full" />
-            Доступно на выбранное время
-          </div>
-        ) : (
-          <div className="bg-border text-muted flex items-center gap-2 rounded-lg p-2.5 text-xs font-semibold">
-            <span className="bg-subtle size-1.5 rounded-full" />
-            Недоступно на выбранное время
-          </div>
-        )}
+        <div
+          className={cn('flex items-center gap-2 rounded-lg p-2.5 text-xs font-semibold', {
+            'bg-available-bg text-available-fg': isAvailable,
+            'bg-border text-muted': !isAvailable,
+          })}
+        >
+          <span
+            className={cn('size-1.5 rounded-full', {
+              'bg-available-fg': isAvailable,
+              'bg-subtle': !isAvailable,
+            })}
+          />
+          {isAvailable ? 'Доступно на выбранное время' : 'Недоступно на выбранное время'}
+        </div>
         <div className="grid grid-cols-2 items-center gap-3">
           <Button variant="ghost" asChild>
             <Link to={generatePath(ROUTES_PATHS.ROOMS_DETAILS, { roomId: room.id })}>
