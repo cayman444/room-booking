@@ -1,19 +1,16 @@
 import { useQuery } from '@tanstack/react-query'
-import type { Booking } from '@/entities/bookings'
 import { apiClient } from '@/shared/api'
+import type { RoomBooking, RoomBookingsParams } from '../model/types'
 
-export interface UseRoomBookingsParams {
-  from?: string
-  to?: string
+interface ApiResponse {
+  items: RoomBooking[]
 }
 
-export function useRoomBookings(roomId?: string, params?: UseRoomBookingsParams) {
-  return useQuery({
+export function useRoomBookings(roomId?: string, params?: RoomBookingsParams) {
+  return useQuery<ApiResponse, Error, RoomBooking[]>({
     queryKey: ['room-bookings', roomId, params?.from, params?.to],
-    queryFn: () =>
-      apiClient
-        .get<Booking[]>(`/rooms/${roomId}/bookings`, { params })
-        .then((res) => res.data),
+    queryFn: () => apiClient.get(`/rooms/${roomId}/bookings`, { params }).then((res) => res.data),
+    select: (data) => data.items,
     enabled: !!roomId,
   })
 }

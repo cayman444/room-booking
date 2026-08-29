@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import type { Room } from '@/entities/rooms'
+import { type Room } from '@/entities/rooms'
 
 interface RoomScheduleProps {
   room: Room
@@ -7,7 +7,7 @@ interface RoomScheduleProps {
 
 export const RoomSchedule: FC<RoomScheduleProps> = ({ room }) => {
   return (
-    <div className="bg-card border-border rounded-2xl border p-6">
+    <div className="bg-card border-border rounded-2xl border p-8">
       Расписание комнаты {room.name}
     </div>
   )

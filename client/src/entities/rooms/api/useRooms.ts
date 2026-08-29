@@ -9,9 +9,8 @@ interface ApiResponse {
 export function useRooms(params: RoomsParams) {
   return useQuery<ApiResponse, Error, Room[]>({
     queryKey: ['rooms', params],
-    queryFn: () => apiClient.get<ApiResponse>('/rooms', { params }).then((res) => res.data),
+    queryFn: () => apiClient.get('/rooms', { params }).then((res) => res.data),
     select: (data) => data.items,
     enabled: Boolean(params.officeId),
   })
 }
-
