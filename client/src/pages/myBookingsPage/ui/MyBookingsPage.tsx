@@ -1,8 +1,14 @@
 import { useState } from 'react'
-import { MyBookingsFilters, MyBookingsList } from '@/widgets/myBookings'
+import { MyBookingsFilters, MyBookingsList, useMyBookings } from '@/widgets/myBookings'
+import { MyBookingsPageSkeleton } from './MyBookingsPageSkeleton'
 
 export function MyBookingsPage() {
   const [selectedOfficeId, setSelectedOfficeId] = useState('')
+  const { isLoading } = useMyBookings({ officeId: selectedOfficeId })
+
+  if (isLoading) {
+    return <MyBookingsPageSkeleton />
+  }
 
   return (
     <div className="flex flex-1 flex-col gap-8 p-10">
