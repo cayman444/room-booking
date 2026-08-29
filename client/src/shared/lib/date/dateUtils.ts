@@ -10,6 +10,7 @@ import {
   setHours,
   startOfDay,
 } from 'date-fns'
+import { ru } from 'date-fns/locale'
 import {
   DURATION_LABELS,
   RU_MONTHS_GENITIVE,
@@ -42,6 +43,13 @@ export function formatDateDisplay(dateInput: Date | string): string {
   const weekday = RU_WEEKDAYS_SHORT[date.getDay()]
 
   return `${day} ${month}, ${weekday}`
+}
+
+export function formatDateDisplaySchedule(dateInput: Date | string): string {
+  const date = typeof dateInput === 'string' ? parseYMDToDate(dateInput) : dateInput
+  const formatted = format(date, 'EEEE, d MMMM', { locale: ru })
+
+  return formatted[0].toUpperCase() + formatted.slice(1)
 }
 
 export function calculateIntervalIso(

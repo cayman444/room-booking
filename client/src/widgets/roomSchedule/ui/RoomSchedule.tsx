@@ -10,8 +10,7 @@ interface RoomScheduleProps {
 }
 
 export const RoomSchedule: FC<RoomScheduleProps> = ({ room }) => {
-  const { bookings, currentUser, isLoading } = useRoomSchedule(room.id)
-
+  const { bookings, currentUser, isLoading, formattedDate } = useRoomSchedule(room.id)
   if (isLoading) {
     return <div className="text-muted py-8 text-center text-sm">Загрузка расписания...</div>
   }
@@ -24,7 +23,7 @@ export const RoomSchedule: FC<RoomScheduleProps> = ({ room }) => {
             <h2 className="text-accent-foreground text-[20px] font-extrabold">
               Расписание на день
             </h2>
-            <p className="text-muted text-sm">Дата</p>
+            <p className="text-muted text-sm">{formattedDate}</p>
           </div>
           <Button variant={'outline'}>
             <div className="flex items-center gap-2">
