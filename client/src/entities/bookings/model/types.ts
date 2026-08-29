@@ -38,9 +38,11 @@ export interface Booking {
 }
 
 export interface BookingsQueryParams {
-  scope?: 'upcoming' | 'past' | 'all'
+  scope?: BookingsScope
   officeId?: string
 }
+
+export type BookingsScope = 'upcoming' | 'past' | 'all'
 
 export interface CreateBookingDto {
   roomId: string
