@@ -3,13 +3,14 @@ import { useRooms } from '@/entities/rooms'
 import { getErrorMessage } from '@/shared/api'
 import { SEARCH_PARAM_KEYS } from '@/shared/config'
 import { calculateIntervalIso, formatDateToYMD } from '@/shared/lib/date'
+import { DEFAULT_TIME_SLOTS } from '@/shared/lib/date/consts'
 
 export const useAvailableRooms = () => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const officeId = searchParams.get(SEARCH_PARAM_KEYS.OFFICE_ID) || ''
   const date = searchParams.get(SEARCH_PARAM_KEYS.DATE) || formatDateToYMD(new Date())
-  const startTime = searchParams.get(SEARCH_PARAM_KEYS.START_TIME) || undefined
+  const startTime = searchParams.get(SEARCH_PARAM_KEYS.START_TIME) || DEFAULT_TIME_SLOTS[0]
   const duration = Number(searchParams.get(SEARCH_PARAM_KEYS.DURATION)) || 60
   const minCapacityStr = searchParams.get(SEARCH_PARAM_KEYS.MIN_CAPACITY)
   const minCapacity =

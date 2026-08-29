@@ -1,5 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 import { SEARCH_PARAM_KEYS } from '@/shared/config'
+import { DEFAULT_TIME_SLOTS } from '@/shared/lib/date/consts'
 import { useUpdateSearchParams } from '@/shared/model'
 
 export function useRoomFilters() {
@@ -8,7 +9,7 @@ export function useRoomFilters() {
 
   const officeId = searchParams.get(SEARCH_PARAM_KEYS.OFFICE_ID) || ''
   const date = searchParams.get(SEARCH_PARAM_KEYS.DATE) || ''
-  const startTime = searchParams.get(SEARCH_PARAM_KEYS.START_TIME) || ''
+  const startTime = searchParams.get(SEARCH_PARAM_KEYS.START_TIME) || DEFAULT_TIME_SLOTS[0]
   const duration = searchParams.get(SEARCH_PARAM_KEYS.DURATION) || '60'
   const minCapacity = searchParams.get(SEARCH_PARAM_KEYS.MIN_CAPACITY) || 'all'
 
