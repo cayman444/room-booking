@@ -11,7 +11,7 @@ export function OfficeSelector() {
   }
 
   return (
-    <div className="border-border bg-card border-b px-10 py-6">
+    <div className="border-border bg-card border-b px-6 py-6 md:px-10">
       <Select value={currentOfficeId} onValueChange={handleSelectOffice}>
         <SelectTrigger className="text-foreground [&>svg]:text-foreground h-auto w-fit gap-2 border-none bg-transparent p-0 text-lg font-bold tracking-tight shadow-none outline-none focus:border-transparent focus:ring-0 focus:ring-offset-0">
           <SelectValue placeholder="Выберите офис">
@@ -29,7 +29,7 @@ export function OfficeSelector() {
           ))}
         </SelectContent>
       </Select>
-      <div className="text-muted mt-1 flex items-center gap-2 text-sm font-normal">
+      <div className="text-muted mt-1 flex flex-wrap items-center gap-2 text-sm font-normal">
         <span>{selectedOffice?.address || 'Адрес не выбран'}</span>
         <span>•</span>
         <span>Местное время: {officeTime}</span>

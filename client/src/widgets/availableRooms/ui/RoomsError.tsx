@@ -8,7 +8,7 @@ interface RoomsErrorProps {
 
 export function RoomsError({ message, onRetry }: RoomsErrorProps) {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center p-10">
+    <div className="flex flex-1 flex-col items-center justify-center p-6 md:p-10">
       <div className="flex flex-col items-center justify-center gap-6 text-center">
         <div className="bg-occupied-bg text-destructive flex size-30 items-center justify-center rounded-full">
           <AlertTriangle className="size-14 stroke-1" />

@@ -18,7 +18,7 @@ export const BookingCard: FC<BookingCardProps> = ({
   const { monthUpper, dayNumber, timeRange } = getBookingCardDetails(booking)
 
   return (
-    <div className="bg-card border-border flex flex-wrap items-center justify-between gap-4 rounded-2xl border p-6 transition-all">
+    <div className="bg-card border-border flex flex-col flex-wrap justify-between gap-4 rounded-2xl border p-6 transition-all md:flex-row md:items-center">
       <div className="flex items-center gap-6">
         <div className="bg-background flex size-20 shrink-0 flex-col items-center justify-center rounded-xl p-3 select-none">
           <span className="text-subtle text-xs leading-none font-bold tracking-wider uppercase">

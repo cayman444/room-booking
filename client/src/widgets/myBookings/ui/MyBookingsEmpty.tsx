@@ -10,7 +10,7 @@ interface MyBookingsEmptyProps {
 
 export const MyBookingsEmpty: FC<MyBookingsEmptyProps> = ({ scope }) => {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center gap-4 p-10 text-center">
+    <div className="flex flex-1 flex-col items-center justify-center gap-4 p-6 text-center md:p-10">
       <div className="bg-primary/15 text-primary flex size-30 items-center justify-center rounded-full">
         <Calendar className="size-12 stroke-2" />
       </div>

@@ -33,7 +33,7 @@ export const AvailableRooms = () => {
   }
 
   return (
-    <div className="p-10">
+    <div className="p-6 md:p-10">
       <h2 className="text-foreground mb-8 text-[22px] font-extrabold">
         Доступные переговорные в этом офисе
       </h2>

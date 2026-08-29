@@ -5,7 +5,7 @@ import { Button } from '@/shared/ui'
 
 export function NotFoundPage() {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center p-10 text-center">
+    <div className="flex flex-1 flex-col items-center justify-center p-6 text-center md:p-10">
       <h1 className="text-primary text-[120px] font-extrabold">404</h1>
       <h2 className="text-foreground mt-3 text-[28px] font-extrabold">Страница не найдена</h2>
       <p className="text-muted mt-3 max-w-md">

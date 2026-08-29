@@ -17,7 +17,7 @@ export function RoomDetailPage() {
   }
 
   return (
-    <div className="flex flex-1 flex-col gap-3 px-10 py-6">
+    <div className="flex flex-1 flex-col gap-3 p-6 md:px-10">
       <RoomDetailBreadcrumbs room={roomDetails} />
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[420px_1fr]">
         <RoomInfo room={roomDetails} />

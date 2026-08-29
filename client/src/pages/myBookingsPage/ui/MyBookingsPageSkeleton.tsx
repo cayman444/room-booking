@@ -4,8 +4,8 @@ import { Skeleton } from '@/shared/ui'
 
 export const MyBookingsPageSkeleton: FC = () => {
   return (
-    <div className="flex flex-1 flex-col gap-8 p-10">
-      <div className="flex items-center justify-between">
+    <div className="flex flex-1 flex-col gap-8 p-6 md:p-10">
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <Skeleton className="h-10.5 w-75 rounded-lg" />
         <div className="flex items-center gap-3">
           <Skeleton className="h-10 w-34 rounded-lg" />

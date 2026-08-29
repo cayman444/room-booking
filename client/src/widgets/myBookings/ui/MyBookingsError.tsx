@@ -8,7 +8,7 @@ interface MyBookingsErrorProps {
 
 export const MyBookingsError: FC<MyBookingsErrorProps> = ({ onRetry }) => {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center gap-6 p-10 text-center">
+    <div className="flex flex-1 flex-col items-center justify-center gap-6 p-6 text-center md:p-10">
       <div className="bg-occupied-bg text-destructive flex size-30 items-center justify-center rounded-full">
         <AlertTriangle className="size-14 stroke-1" />
       </div>

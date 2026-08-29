@@ -20,7 +20,7 @@ export function RoomFilters() {
   const isDisabled = !officeId
 
   return (
-    <div className="border-border bg-card flex flex-wrap items-center gap-4 border-b px-10 py-5">
+    <div className="border-border bg-card flex flex-wrap items-center gap-4 border-b px-6 py-5 md:px-10">
       <FilterDate value={date} onChange={setDate} disabled={isDisabled} />
       <FilterStartTime value={startTime} onChange={setStartTime} disabled={isDisabled} />
       <FilterDuration value={duration} onChange={setDuration} disabled={isDisabled} />

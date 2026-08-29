@@ -5,9 +5,9 @@ import { Button, Skeleton } from '@/shared/ui'
 
 export const RoomScheduleSkeleton: FC = () => {
   return (
-    <div className="bg-card border-border rounded-2xl border p-8">
+    <div className="bg-card border-border rounded-2xl border p-5 sm:p-8">
       <div className="flex flex-col gap-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="space-y-1">
             <Skeleton className="h-7.5 w-50 rounded" />
             <Skeleton className="h-5 w-32 rounded" />
