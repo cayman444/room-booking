@@ -154,3 +154,67 @@ body {
 .animate-dialog-content[data-state='closed'] {
   animation: dialog-content-exit 140ms ease-in forwards;
 }
+
+@keyframes sheet-slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes sheet-slide-out-right {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes sheet-slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes sheet-slide-out-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-sheet-overlay[data-state='open'] {
+  animation: dialog-overlay-enter 280ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-sheet-overlay[data-state='closed'] {
+  animation: dialog-overlay-exit 200ms ease-in forwards;
+}
+
+.animate-sheet-content[data-state='open'][data-side='right'] {
+  animation: sheet-slide-in-right 280ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-sheet-content[data-state='closed'][data-side='right'] {
+  animation: sheet-slide-out-right 200ms ease-in forwards;
+}
+
+.animate-sheet-content[data-state='open'][data-side='left'] {
+  animation: sheet-slide-in-left 280ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-sheet-content[data-state='closed'][data-side='left'] {
+  animation: sheet-slide-out-left 200ms ease-in forwards;
+}

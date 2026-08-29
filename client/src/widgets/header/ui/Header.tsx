@@ -1,6 +1,7 @@
 import { CalendarCheck } from 'lucide-react'
 import { Link, NavLink } from 'react-router-dom'
 import { ROUTES_PATHS } from '@/shared/config/routes'
+import { Burger } from './Burger'
 import { UserCard } from './UserCard'
 
 const NAV_LIST = [
@@ -16,15 +17,15 @@ const NAV_LIST = [
 
 export function Header() {
   return (
-    <header className="border-border bg-card sticky top-0 z-40 h-18 border-b px-10 py-4.5">
-      <div className="flex h-full items-center justify-between gap-12">
+    <header className="border-border bg-card sticky top-0 z-40 h-18 border-b px-6 py-4.5 md:px-10">
+      <div className="flex h-full items-center justify-between gap-4 md:gap-12">
         <Link to={ROUTES_PATHS.ROOMS} className="flex items-center gap-3">
           <div className="bg-primary text-primary-foreground flex size-9 items-center justify-center rounded-[10px] shadow-sm">
             <CalendarCheck className="size-4.5 stroke-3" />
           </div>
           <h2 className="text-foreground text-xl font-extrabold tracking-tight">BookRoom</h2>
         </Link>
-        <nav>
+        <nav className="hidden md:block">
           <ul className="flex items-center gap-6 md:gap-8">
             {NAV_LIST.map(({ link, label }) => (
               <li key={label}>
@@ -44,7 +45,10 @@ export function Header() {
             ))}
           </ul>
         </nav>
-        <UserCard />
+        <div className="hidden md:block">
+          <UserCard />
+        </div>
+        <Burger />
       </div>
     </header>
   )
