@@ -1,6 +1,7 @@
+import { CalendarIcon } from 'lucide-react'
 import type { FC } from 'react'
 import { SCHEDULE_HOURS } from '@/shared/lib/date/consts'
-import { Skeleton } from '@/shared/ui'
+import { Button, Skeleton } from '@/shared/ui'
 
 export const RoomScheduleSkeleton: FC = () => {
   return (
@@ -11,7 +12,10 @@ export const RoomScheduleSkeleton: FC = () => {
             <Skeleton className="h-7.5 w-50 rounded" />
             <Skeleton className="h-5 w-32 rounded" />
           </div>
-          <Skeleton className="h-10 w-38 rounded-lg" />
+          <Button variant="outline">
+            <CalendarIcon className="text-muted size-4 stroke-3" />
+            <span>Выбрать дату</span>
+          </Button>
         </div>
         <div className="mt-2.5 grid grid-cols-[60px_1fr] select-none">
           <div className="grid grid-rows-[repeat(44,12px)] text-sm">
