@@ -16,7 +16,7 @@ const NAV_LIST = [
 
 export function Header() {
   return (
-    <header className="border-border bg-card h-18 border-b px-10 py-4.5">
+    <header className="border-border bg-card sticky top-0 z-40 h-18 border-b px-10 py-4.5">
       <div className="flex h-full items-center justify-between gap-12">
         <Link to={ROUTES_PATHS.ROOMS} className="flex items-center gap-3">
           <div className="bg-primary text-primary-foreground flex size-9 items-center justify-center rounded-[10px] shadow-sm">
