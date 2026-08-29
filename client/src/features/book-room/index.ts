@@ -1,6 +1,5 @@
 export * from './model/bookRoom.schema'
 export * from './model/useBookRoomModal'
-export * from './ui/BookingConflictModal'
 export * from './ui/BookingSummary'
 export * from './ui/BookRoom'
 export * from './ui/BookRoomModal'
