@@ -42,6 +42,9 @@ export const RoomScheduleSkeleton: FC = () => {
             ))}
           </div>
         </div>
+        <div className="flex justify-end">
+          <Skeleton className="h-11 w-57.5 rounded-lg" />
+        </div>
       </div>
     </div>
   )

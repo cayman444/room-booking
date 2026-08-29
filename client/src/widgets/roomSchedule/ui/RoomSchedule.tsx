@@ -1,5 +1,7 @@
 import type { FC } from 'react'
 import { type Room } from '@/entities/rooms'
+import { BookRoomModal, useBookRoomModal } from '@/features/book-room'
+import { Button } from '@/shared/ui'
 import { useRoomSchedule } from '../model/useRoomSchedule'
 import { RoomScheduleDateSelect } from './RoomScheduleDateSelect'
 import { RoomScheduleError } from './RoomScheduleError'
@@ -13,6 +15,12 @@ interface RoomScheduleProps {
 export const RoomSchedule: FC<RoomScheduleProps> = ({ room }) => {
   const { bookings, currentUser, isLoading, isError, formattedDate, date, refetch } =
     useRoomSchedule(room.id)
+  const {
+    isOpen: modalBookOpen,
+    selectedRoom: currentRoom,
+    openBookModal: handleOpenModal,
+    handleOpenChange: handleChangeModalOpen,
+  } = useBookRoomModal()
 
   if (isLoading) {
     return <RoomScheduleSkeleton />
@@ -35,7 +43,17 @@ export const RoomSchedule: FC<RoomScheduleProps> = ({ room }) => {
           <RoomScheduleDateSelect date={date} />
         </div>
         <ScheduleList bookings={bookings} currentUser={currentUser} />
+        <div className="flex justify-end">
+          <Button size={'lg'} onClick={() => handleOpenModal(room)}>
+            Забронировать комнату
+          </Button>
+        </div>
       </div>
+      <BookRoomModal
+        isOpen={modalBookOpen}
+        onOpenChange={handleChangeModalOpen}
+        currentRoom={currentRoom}
+      />
     </div>
   )
 }
