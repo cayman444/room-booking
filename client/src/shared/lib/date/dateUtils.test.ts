@@ -5,12 +5,12 @@ import {
   formatBookingSummary,
   formatBookingToastDescription,
   formatDateDisplay,
+  formatDateDisplaySchedule,
   formatDateToYMD,
   formatTimezoneShort,
   isBookingDateAllowed,
   parseYMDToDate,
 } from './dateUtils'
-
 
 describe('dateUtils', () => {
   it('formatDateToYMD formats date to YYYY-MM-DD', () => {
@@ -25,9 +25,14 @@ describe('dateUtils', () => {
     expect(parsed.getDate()).toBe(24)
   })
 
-  it('formatDateDisplay formats date as "24 Октября, Сб"', () => {
+  it('formatDateDisplay formats date as "24 октября, Сб"', () => {
     const testDate = new Date(2026, 9, 24)
-    expect(formatDateDisplay(testDate)).toBe('24 Октября, Сб')
+    expect(formatDateDisplay(testDate)).toBe('24 октября, Сб')
+  })
+
+  it('formatDateDisplaySchedule formats date as "Суббота, 24 октября"', () => {
+    const testDate = new Date(2026, 9, 24)
+    expect(formatDateDisplaySchedule(testDate)).toBe('Суббота, 24 октября')
   })
 
   it('calculateIntervalIso computes ISO start and end timestamps', () => {
@@ -55,10 +60,10 @@ describe('dateUtils', () => {
 
   it('formatBookingSummary generates summary string matching Figma mockup', () => {
     expect(formatBookingSummary('2026-10-20', '15:00', 60)).toBe(
-      'Бронирование на Вторник, 20 Октября, 15:00 - 16:00 (1 час)',
+      'Бронирование на Вторник, 20 октября, 15:00 - 16:00 (1 час)',
     )
     expect(formatBookingSummary('2026-10-18', '15:00', 60)).toBe(
-      'Бронирование на Воскресенье, 18 Октября, 15:00 - 16:00 (1 час)',
+      'Бронирование на Воскресенье, 18 октября, 15:00 - 16:00 (1 час)',
     )
   })
 

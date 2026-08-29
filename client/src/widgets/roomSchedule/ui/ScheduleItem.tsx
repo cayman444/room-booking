@@ -1,6 +1,6 @@
 import type { FC } from 'react'
-import { getGridRowSpan } from '@/shared/lib/date'
 import { cn } from '@/shared/lib/utils'
+import { getGridRowSpan } from '../lib/scheduleUtils'
 
 interface ScheduleItemProps {
   title: string

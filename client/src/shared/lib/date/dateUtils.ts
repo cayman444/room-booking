@@ -2,23 +2,13 @@ import {
   addDays,
   addMinutes,
   differenceInCalendarDays,
-  differenceInMinutes,
   format,
   isBefore,
   parse,
-  parseISO,
-  setHours,
   startOfDay,
 } from 'date-fns'
 import { ru } from 'date-fns/locale'
-import {
-  DURATION_LABELS,
-  RU_MONTHS_GENITIVE,
-  RU_WEEKDAYS_ON,
-  RU_WEEKDAYS_SHORT,
-  WORK_DAY_START_HOUR,
-  WORK_DAY_TOTAL_MINUTES,
-} from './consts'
+import { DURATION_LABELS } from './consts'
 
 export function formatDateToYMD(date: Date = new Date()): string {
   return format(date, 'yyyy-MM-dd')
@@ -37,12 +27,15 @@ export function parseYMDToDate(dateStr?: string): Date {
 
 export function formatDateDisplay(dateInput: Date | string): string {
   const date = typeof dateInput === 'string' ? parseYMDToDate(dateInput) : dateInput
+  const text = format(date, 'd MMMM, cccccc', { locale: ru })
+  const parts = text.split(', ')
 
-  const day = date.getDate()
-  const month = RU_MONTHS_GENITIVE[date.getMonth()]
-  const weekday = RU_WEEKDAYS_SHORT[date.getDay()]
+  if (parts.length === 2) {
+    const weekday = parts[1][0].toUpperCase() + parts[1].slice(1)
+    return `${parts[0]}, ${weekday}`
+  }
 
-  return `${day} ${month}, ${weekday}`
+  return text
 }
 
 export function formatDateDisplaySchedule(dateInput: Date | string): string {
@@ -89,12 +82,16 @@ export function getBookingIntervalInfo(
   const startDate = parse(`${dateStr} ${startTimeStr}`, 'yyyy-MM-dd HH:mm', new Date())
   const endDate = addMinutes(startDate, durationMinutes)
 
+  const weekdayName = format(startDate, 'EEEE', { locale: ru })
+  const weekday = weekdayName[0].toUpperCase() + weekdayName.slice(1)
+  const formattedDayMonth = format(startDate, 'd MMMM', { locale: ru })
+
   return {
     startDate,
     endDate,
     day: startDate.getDate(),
-    month: RU_MONTHS_GENITIVE[startDate.getMonth()],
-    weekday: RU_WEEKDAYS_ON[startDate.getDay()],
+    formattedDayMonth,
+    weekday,
     startTime: startTimeStr,
     endTime: format(endDate, 'HH:mm'),
     durationText: DURATION_LABELS[durationMinutes.toString()] ?? `${durationMinutes} минут`,
@@ -106,13 +103,13 @@ export function formatBookingSummary(
   startTimeStr: string,
   durationMinutes: number,
 ): string {
-  const { weekday, day, month, startTime, endTime, durationText } = getBookingIntervalInfo(
+  const { weekday, formattedDayMonth, startTime, endTime, durationText } = getBookingIntervalInfo(
     dateInput,
     startTimeStr,
     durationMinutes,
   )
 
-  return `Бронирование на ${weekday}, ${day} ${month}, ${startTime} - ${endTime} (${durationText})`
+  return `Бронирование на ${weekday}, ${formattedDayMonth}, ${startTime} - ${endTime} (${durationText})`
 }
 
 export function formatTimezoneShort(timezone?: string): string {
@@ -128,7 +125,7 @@ export function formatBookingToastDescription(
   durationMinutes: number,
   timezone?: string,
 ): string {
-  const { day, month, startTime, endTime } = getBookingIntervalInfo(
+  const { formattedDayMonth, startTime, endTime } = getBookingIntervalInfo(
     dateInput,
     startTimeStr,
     durationMinutes,
@@ -137,7 +134,7 @@ export function formatBookingToastDescription(
   const tzShort = formatTimezoneShort(timezone)
   const tzSuffix = tzShort ? ` ${tzShort}` : ''
 
-  return `Комната ${roomName}, ${day} ${month.toLowerCase()}, ${startTime}–${endTime}${tzSuffix}`
+  return `Комната ${roomName}, ${formattedDayMonth}, ${startTime}–${endTime}${tzSuffix}`
 }
 
 export function isBookingDateAllowed(date: Date, maxDaysAhead = 30): boolean {
@@ -156,19 +153,4 @@ export function getAvailableDatesList(daysAhead = 30): Date[] {
   const today = startOfDay(new Date())
 
   return Array.from({ length: daysAhead + 1 }).map((_, index) => addDays(today, index))
-}
-
-export function getGridRowSpan(startsAt: string, endsAt: string) {
-  const start = parseISO(startsAt)
-  const end = parseISO(endsAt)
-
-  const dayStart = setHours(startOfDay(start), WORK_DAY_START_HOUR)
-
-  const startOffset = Math.max(0, differenceInMinutes(start, dayStart))
-  const endOffset = Math.min(WORK_DAY_TOTAL_MINUTES, differenceInMinutes(end, dayStart))
-
-  const startRow = Math.floor(startOffset / 15) + 1
-  const endRow = Math.ceil(endOffset / 15) + 1
-
-  return `${startRow} / ${endRow}`
 }
