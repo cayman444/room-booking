@@ -29,8 +29,8 @@ export interface RoomsParams {
 }
 
 export interface RoomBookingsParams {
-  from: string
-  to: string
+  from?: string
+  to?: string
 }
 
 export interface Room {

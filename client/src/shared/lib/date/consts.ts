@@ -49,6 +49,25 @@ export const DURATION_LABELS = DEFAULT_DURATION_OPTIONS.reduce<Record<string, st
   {},
 )
 
+export const SCHEDULE_HOURS = [
+  '09:00',
+  '10:00',
+  '11:00',
+  '12:00',
+  '13:00',
+  '14:00',
+  '15:00',
+  '16:00',
+  '17:00',
+  '18:00',
+  '19:00',
+  '20:00',
+] as const
+
+export const WORK_DAY_START_HOUR = 9
+export const WORK_DAY_END_HOUR = 20
+export const WORK_DAY_TOTAL_MINUTES = (WORK_DAY_END_HOUR - WORK_DAY_START_HOUR) * 60
+
 export const DEFAULT_TIME_SLOTS = [
   '09:00',
   '09:15',
@@ -94,4 +113,4 @@ export const DEFAULT_TIME_SLOTS = [
   '19:15',
   '19:30',
   '19:45',
-]
+] as const

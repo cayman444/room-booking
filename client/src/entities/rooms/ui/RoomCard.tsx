@@ -1,6 +1,6 @@
 import { Clock, Users } from 'lucide-react'
 import type { FC } from 'react'
-import { generatePath, Link } from 'react-router-dom'
+import { generatePath, Link, useSearchParams } from 'react-router-dom'
 import { ROUTES_PATHS } from '@/shared/config'
 import { cn } from '@/shared/lib/utils'
 import { Button } from '@/shared/ui'
@@ -12,6 +12,8 @@ interface RoomCardProps {
 }
 
 export const RoomCard: FC<RoomCardProps> = ({ room, onBook }) => {
+  const [searchParams] = useSearchParams()
+
   const isAvailable = room.available !== false
 
   return (
@@ -47,7 +49,12 @@ export const RoomCard: FC<RoomCardProps> = ({ room, onBook }) => {
         </div>
         <div className="grid grid-cols-2 items-center gap-3">
           <Button variant="ghost" asChild>
-            <Link to={generatePath(ROUTES_PATHS.ROOMS_DETAILS, { roomId: room.id })}>
+            <Link
+              to={{
+                pathname: generatePath(ROUTES_PATHS.ROOMS_DETAILS, { roomId: room.id }),
+                search: searchParams.toString(),
+              }}
+            >
               Подробнее
             </Link>
           </Button>
