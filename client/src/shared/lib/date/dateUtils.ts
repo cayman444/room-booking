@@ -8,7 +8,7 @@ import {
   startOfDay,
 } from 'date-fns'
 import { ru } from 'date-fns/locale'
-import { DURATION_LABELS } from './consts'
+import { DURATION_LABELS, RU_WEEKDAYS_ACCUSATIVE } from './consts'
 
 export function formatDateToYMD(date: Date = new Date()): string {
   return format(date, 'yyyy-MM-dd')
@@ -82,8 +82,7 @@ export function getBookingIntervalInfo(
   const startDate = parse(`${dateStr} ${startTimeStr}`, 'yyyy-MM-dd HH:mm', new Date())
   const endDate = addMinutes(startDate, durationMinutes)
 
-  const weekdayName = format(startDate, 'EEEE', { locale: ru })
-  const weekday = weekdayName[0].toUpperCase() + weekdayName.slice(1)
+  const weekday = RU_WEEKDAYS_ACCUSATIVE[startDate.getDay()]
   const formattedDayMonth = format(startDate, 'd MMMM', { locale: ru })
 
   return {

@@ -22,6 +22,16 @@ export const DURATION_LABELS = DEFAULT_DURATION_OPTIONS.reduce<Record<string, st
   {},
 )
 
+export const RU_WEEKDAYS_ACCUSATIVE = [
+  'Воскресенье',
+  'Понедельник',
+  'Вторник',
+  'Среду',
+  'Четверг',
+  'Пятницу',
+  'Субботу',
+] as const
+
 export const SCHEDULE_HOURS = [
   '09:00',
   '10:00',
