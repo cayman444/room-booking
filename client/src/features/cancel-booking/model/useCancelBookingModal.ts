@@ -12,14 +12,10 @@ export function useCancelBookingModal() {
 
   const closeCancelModal = () => {
     setIsOpen(false)
-    setSelectedBooking(null)
   }
 
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open)
-    if (!open) {
-      setSelectedBooking(null)
-    }
   }
 
   return {

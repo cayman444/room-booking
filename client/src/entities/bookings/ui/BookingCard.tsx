@@ -44,7 +44,7 @@ export const BookingCard: FC<BookingCardProps> = ({
       </div>
       {showCancelButton && onCancel && (
         <div className="flex shrink-0 items-center">
-          <Button variant="destructive" onClick={() => onCancel(booking)}>
+          <Button variant="destructiveOutline" onClick={() => onCancel(booking)}>
             Отменить
           </Button>
         </div>
