@@ -2,12 +2,22 @@ import {
   addDays,
   addMinutes,
   differenceInCalendarDays,
+  differenceInMinutes,
   format,
   isBefore,
   parse,
+  parseISO,
+  setHours,
   startOfDay,
 } from 'date-fns'
-import { DURATION_LABELS, RU_MONTHS_GENITIVE, RU_WEEKDAYS_ON, RU_WEEKDAYS_SHORT } from './consts'
+import {
+  DURATION_LABELS,
+  RU_MONTHS_GENITIVE,
+  RU_WEEKDAYS_ON,
+  RU_WEEKDAYS_SHORT,
+  WORK_DAY_START_HOUR,
+  WORK_DAY_TOTAL_MINUTES,
+} from './consts'
 
 export function formatDateToYMD(date: Date = new Date()): string {
   return format(date, 'yyyy-MM-dd')
@@ -138,4 +148,19 @@ export function getAvailableDatesList(daysAhead = 30): Date[] {
   const today = startOfDay(new Date())
 
   return Array.from({ length: daysAhead + 1 }).map((_, index) => addDays(today, index))
+}
+
+export function getGridRowSpan(startsAt: string, endsAt: string) {
+  const start = parseISO(startsAt)
+  const end = parseISO(endsAt)
+
+  const dayStart = setHours(startOfDay(start), WORK_DAY_START_HOUR)
+
+  const startOffset = Math.max(0, differenceInMinutes(start, dayStart))
+  const endOffset = Math.min(WORK_DAY_TOTAL_MINUTES, differenceInMinutes(end, dayStart))
+
+  const startRow = Math.floor(startOffset / 15) + 1
+  const endRow = Math.ceil(endOffset / 15) + 1
+
+  return `${startRow} / ${endRow}`
 }

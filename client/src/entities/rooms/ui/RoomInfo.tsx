@@ -19,7 +19,7 @@ export const RoomInfo: FC<RoomInfoProps> = ({ room }) => {
     : room.office.address
 
   return (
-    <div className="bg-card border-border flex flex-col rounded-2xl border p-6">
+    <div className="bg-card border-border flex flex-col self-start rounded-2xl border p-6">
       <h1 className="text-foreground text-2xl font-extrabold tracking-tight">{room.name}</h1>
       <p className="text-muted mt-2 text-sm">
         {room.office.name} · {formattedAddress}
