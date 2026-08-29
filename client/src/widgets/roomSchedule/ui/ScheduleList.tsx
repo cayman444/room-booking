@@ -1,28 +1,16 @@
 import type { FC } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { useRoomBookings } from '@/entities/rooms'
-import { useMe } from '@/entities/user'
-import { SEARCH_PARAM_KEYS } from '@/shared/config'
-import { calculateIntervalIso, formatDateToYMD, getGridRowSpan } from '@/shared/lib/date'
-import { SCHEDULE_HOURS, WORK_DAY_TOTAL_MINUTES } from '@/shared/lib/date/consts'
-import { cn } from '@/shared/lib/utils'
+import { type RoomBooking } from '@/entities/rooms'
+import { type User } from '@/entities/user'
+import { SCHEDULE_HOURS } from '@/shared/lib/date/consts'
+import { getBookingCardInfo } from '../lib/scheduleUtils'
+import { ScheduleItem } from './ScheduleItem'
 
 interface ScheduleListProps {
-  roomId: string
+  bookings: RoomBooking[]
+  currentUser?: User
 }
 
-export const ScheduleList: FC<ScheduleListProps> = ({ roomId }) => {
-  const [searchParams] = useSearchParams()
-  const date = searchParams.get(SEARCH_PARAM_KEYS.DATE) || formatDateToYMD(new Date())
-
-  const { data: currentUser } = useMe()
-  const { from, to } = calculateIntervalIso(date, SCHEDULE_HOURS[0], WORK_DAY_TOTAL_MINUTES)
-  const { data: bookings = [], isLoading } = useRoomBookings(roomId, { from, to })
-
-  if (isLoading) {
-    return <div className="text-muted py-8 text-center text-sm">Загрузка расписания...</div>
-  }
-
+export const ScheduleList: FC<ScheduleListProps> = ({ bookings, currentUser }) => {
   return (
     <div className="mt-2.5 grid grid-cols-[60px_1fr] select-none">
       <div className="grid grid-rows-[repeat(44,12px)] text-sm">
@@ -50,23 +38,17 @@ export const ScheduleList: FC<ScheduleListProps> = ({ roomId }) => {
         {bookings.map((booking) => {
           const isMyBooking =
             booking.userId === currentUser?.id || booking.owner?.id === currentUser?.id
+          const { label, fullTitle } = getBookingCardInfo(booking, isMyBooking)
 
           return (
-            <div
+            <ScheduleItem
               key={booking.id}
-              style={{
-                gridRow: getGridRowSpan(booking.startsAt, booking.endsAt),
-                gridColumn: '1 / -1',
-              }}
-              className={cn(
-                'z-10 m-0.5 flex items-center rounded-xl px-4 py-1 text-sm font-medium transition-all',
-                isMyBooking
-                  ? 'bg-primary/10 border-primary text-primary border'
-                  : 'bg-muted/70 text-foreground border-border/40 border',
-              )}
-            >
-              <span className="truncate">{isMyBooking ? booking.title : 'Занято'}</span>
-            </div>
+              title={fullTitle}
+              label={label}
+              startsAt={booking.startsAt}
+              endsAt={booking.endsAt}
+              isMyBooking={isMyBooking}
+            />
           )
         })}
       </div>

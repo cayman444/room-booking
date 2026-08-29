@@ -2,6 +2,7 @@ import { CalendarIcon } from 'lucide-react'
 import type { FC } from 'react'
 import { type Room } from '@/entities/rooms'
 import { Button } from '@/shared/ui'
+import { useRoomSchedule } from '../model/useRoomSchedule'
 import { ScheduleList } from './ScheduleList'
 
 interface RoomScheduleProps {
@@ -9,6 +10,12 @@ interface RoomScheduleProps {
 }
 
 export const RoomSchedule: FC<RoomScheduleProps> = ({ room }) => {
+  const { bookings, currentUser, isLoading } = useRoomSchedule(room.id)
+
+  if (isLoading) {
+    return <div className="text-muted py-8 text-center text-sm">Загрузка расписания...</div>
+  }
+
   return (
     <div className="bg-card border-border rounded-2xl border p-8">
       <div className="flex flex-col gap-6">
@@ -26,7 +33,7 @@ export const RoomSchedule: FC<RoomScheduleProps> = ({ room }) => {
             </div>
           </Button>
         </div>
-        <ScheduleList roomId={room.id} />
+        <ScheduleList bookings={bookings} currentUser={currentUser} />
       </div>
     </div>
   )
