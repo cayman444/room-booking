@@ -7,7 +7,7 @@ interface UseMyBookingsParams {
 }
 
 export function useMyBookings(params?: UseMyBookingsParams) {
-  const scope = params?.scope || 'all'
+  const scope = params?.scope || 'upcoming'
   const officeId = params?.officeId || ''
 
   const {
@@ -20,8 +20,14 @@ export function useMyBookings(params?: UseMyBookingsParams) {
     officeId: officeId || undefined,
   })
 
+  const { data: upcomingData = [] } = useBookings({
+    scope: 'upcoming',
+    officeId: officeId || undefined,
+  })
+
   return {
     bookings,
+    upcomingCount: upcomingData.length,
     isLoading,
     isError,
     refetch,
