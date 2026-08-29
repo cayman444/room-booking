@@ -4,4 +4,5 @@ export const SEARCH_PARAM_KEYS = {
   START_TIME: 'startTime',
   DURATION: 'duration',
   MIN_CAPACITY: 'minCapacity',
+  SCOPE: 'scope',
 } as const

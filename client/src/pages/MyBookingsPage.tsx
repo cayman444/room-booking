@@ -1,8 +1,14 @@
+import { MyBookingsList } from '@/widgets/myBookingsList'
+
 export function MyBookingsPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-foreground text-2xl font-bold">Мои бронирования</h1>
-      <p className="text-muted mt-2">Список предстоящих и прошедших бронирований</p>
+    <div className="flex flex-1 flex-col gap-8 p-10">
+      <div className="flex items-center justify-between">
+        <h1 className="text-foreground text-[28px] font-extrabold tracking-tight">
+          Мои бронирования
+        </h1>
+      </div>
+      <MyBookingsList />
     </div>
   )
 }

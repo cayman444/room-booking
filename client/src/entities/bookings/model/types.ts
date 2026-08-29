@@ -1,29 +1,45 @@
 export interface BookingOwner {
   id: string
+  login: string
   displayName: string
+  email: string
+  avatarUrl?: string | null
+  initials: string
+}
+
+export interface BookingRoom {
+  id: string
+  officeId: string
+  name: string
+  floor: number
+  capacity: number
+  features: { code: string; name: string }[]
+}
+
+export interface BookingOffice {
+  id: string
+  name: string
+  address: string
+  timezone: string
 }
 
 export interface Booking {
   id: string
   roomId: string
-  officeId: string
+  userId: string
   title: string
-  comment?: string
+  comment?: string | null
   startsAt: string
   endsAt: string
-  status: 'active' | 'cancelled'
-  owner: BookingOwner
   createdAt: string
-  room?: {
-    id: string
-    name: string
-    floor: number
-    office: {
-      id: string
-      name: string
-      timezone?: string
-    }
-  }
+  room: BookingRoom
+  office: BookingOffice
+  owner: BookingOwner
+}
+
+export interface BookingsQueryParams {
+  scope?: 'upcoming' | 'past' | 'all'
+  officeId?: string
 }
 
 export interface CreateBookingDto {
