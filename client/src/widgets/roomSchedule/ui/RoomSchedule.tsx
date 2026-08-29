@@ -3,6 +3,8 @@ import type { FC } from 'react'
 import { type Room } from '@/entities/rooms'
 import { Button } from '@/shared/ui'
 import { useRoomSchedule } from '../model/useRoomSchedule'
+import { RoomScheduleError } from './RoomScheduleError'
+import { RoomScheduleSkeleton } from './RoomScheduleSkeleton'
 import { ScheduleList } from './ScheduleList'
 
 interface RoomScheduleProps {
@@ -10,9 +12,16 @@ interface RoomScheduleProps {
 }
 
 export const RoomSchedule: FC<RoomScheduleProps> = ({ room }) => {
-  const { bookings, currentUser, isLoading, formattedDate } = useRoomSchedule(room.id)
+  const { bookings, currentUser, isLoading, isError, formattedDate, refetch } = useRoomSchedule(
+    room.id,
+  )
+
   if (isLoading) {
-    return <div className="text-muted py-8 text-center text-sm">Загрузка расписания...</div>
+    return <RoomScheduleSkeleton />
+  }
+
+  if (isError) {
+    return <RoomScheduleError onRetry={refetch} />
   }
 
   return (

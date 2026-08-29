@@ -5,4 +5,5 @@ export * from './model/types'
 export * from './ui/RoomCard'
 export * from './ui/RoomCardSkeleton'
 export * from './ui/RoomInfo'
+export * from './ui/RoomInfoSkeleton'
 

@@ -11,8 +11,13 @@ export const useRoomSchedule = (roomId: string) => {
 
   const { data: currentUser } = useMe()
   const { from, to } = calculateIntervalIso(date, SCHEDULE_HOURS[0], WORK_DAY_TOTAL_MINUTES)
-  const { data: bookings = [], isLoading } = useRoomBookings(roomId, { from, to })
+  const {
+    data: bookings = [],
+    isLoading,
+    isError,
+    refetch,
+  } = useRoomBookings(roomId, { from, to })
   const formattedDate = formatDateDisplaySchedule(date)
 
-  return { bookings, currentUser, isLoading, formattedDate }
+  return { bookings, currentUser, isLoading, isError, refetch, formattedDate, date }
 }

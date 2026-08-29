@@ -2,12 +2,19 @@ import { RoomInfo } from '@/entities/rooms'
 import { RoomSchedule } from '@/widgets/roomSchedule'
 import { useRoomDetail } from '../model/useRoomDetails'
 import { RoomDetailBreadcrumbs } from './RoomDetailBreadcrumbs'
+import { RoomDetailPageError } from './RoomDetailPageError'
+import { RoomDetailPageSkeleton } from './RoomDetailPageSkeleton'
 
 export function RoomDetailPage() {
-  const { roomDetails, isLoading } = useRoomDetail()
+  const { roomDetails, isLoading, isError, refetch } = useRoomDetail()
 
-  if (isLoading) return 'loading...'
-  if (!roomDetails) return null
+  if (isLoading) {
+    return <RoomDetailPageSkeleton />
+  }
+
+  if (isError || !roomDetails) {
+    return <RoomDetailPageError onRetry={refetch} />
+  }
 
   return (
     <div className="flex flex-1 flex-col gap-3 px-10 py-6">

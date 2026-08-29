@@ -4,7 +4,7 @@ import { useRoomDetails } from '@/entities/rooms'
 export const useRoomDetail = () => {
   const { roomId } = useParams<{ roomId: string }>()
 
-  const { data: roomDetails, isLoading } = useRoomDetails(roomId)
+  const { data: roomDetails, isLoading, isError, refetch } = useRoomDetails(roomId)
 
-  return { roomDetails, isLoading }
+  return { roomDetails, isLoading, isError, refetch }
 }
