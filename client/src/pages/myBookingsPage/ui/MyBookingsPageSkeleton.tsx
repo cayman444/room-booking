@@ -6,7 +6,7 @@ export const MyBookingsPageSkeleton: FC = () => {
   return (
     <div className="flex flex-1 flex-col gap-8 p-10">
       <div className="flex items-center justify-between">
-        <Skeleton className="h-8 w-56 rounded-lg" />
+        <Skeleton className="h-10.5 w-75 rounded-lg" />
         <div className="flex items-center gap-3">
           <Skeleton className="h-10 w-34 rounded-lg" />
         </div>
