@@ -7,8 +7,8 @@
 ### 1. Клонирование репозитория
 
 ```bash
-git clone https://github.com/talense-tasks/frontend-trainee-assignment-autumn-2026-cayman444-383b2617.git
-cd frontend-trainee-assignment-autumn-2026-cayman444-383b2617
+git clone https://github.com/cayman444/room-booking.git
+cd room-booking
 ```
 
 ### 2. Запуск сервера (терминал 1)
